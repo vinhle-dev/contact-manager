@@ -1,0 +1,15 @@
+<div class="tab-content {{isActive() ? 'tab-content__active' : ''}}">
+  <div (click)="doAction()" class="tab-label">
+    <a #labelRef></a>
+  </div>
+  <div *ngIf="dropdownTemplate"
+       (click)="toggleDropdown()"
+       class="tab-icon-box">
+    <div class="tab-icon pointer-events__none"></div>
+  </div>
+</div>
+<div *ngIf="dropdownTemplate" class="dropdown">
+  <div #dropdown class="dropdown-container">
+    <ng-container *ngTemplateOutlet="dropdownTemplate"></ng-container>
+  </div>
+</div>

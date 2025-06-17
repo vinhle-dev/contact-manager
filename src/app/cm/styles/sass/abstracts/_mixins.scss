@@ -1,0 +1,33 @@
+@mixin backgroundBase($url, $position) {
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-position: $position;
+}
+
+@mixin background($url, $width, $height, $position) {
+  @include backgroundBase($url, $position);
+  width: $width;
+  height: $height;
+}
+
+@mixin backgroundDefault($url) {
+  @include backgroundBase($url, center);
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+@mixin backgroundDefaultWithPosition($url, $position) {
+  @include backgroundBase($url, $position);
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+@mixin backgroundWithDimentions($url, $width, $height) {
+  @include backgroundBase($url, center);
+  width: $width;
+  height: $height;
+}
+
+@mixin backgroundWithPosition($url, $position) {
+  @include backgroundBase($url, $position);
+}

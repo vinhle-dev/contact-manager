@@ -1,0 +1,37 @@
+<page [id]="id"
+      [title]="title"
+      [location]="location"
+      [screenRef]="screen"
+      [startInEditMode]="true">
+</page>
+
+<ng-template #screen>
+  <screen>
+    <list-view-input>
+      <list-view>
+        <row-iterator [id]="'ScriptParametersLV'"
+                      [listData]="parameters"
+                      [names]="['Name', 'Type', 'Value']"
+                      [editable]="true">
+          <row *ngFor="let parameter of parameters; index as i"
+               [iterator]="'ScriptParametersLV'"
+               [rowNumber]="i"
+               [editable]="true">
+            <text-cell [id]="'Name'"
+                       [data]="parameter"
+                       [value]="'name'">
+            </text-cell>
+            <text-cell [id]="'Type'"
+                       [data]="parameter"
+                       [value]="'type'">
+            </text-cell>
+            <text-cell [id]="'Value'"
+                       [data]="parameter"
+                       [value]="'value'">
+            </text-cell>
+          </row>
+        </row-iterator>
+      </list-view>
+    </list-view-input>
+  </screen>
+</ng-template>

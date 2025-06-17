@@ -1,0 +1,9 @@
+<ng-template #template>
+  <div class="lv-data lv-check-column">
+    <input #checkBox
+           *ngIf="editable" type="checkbox" class="lv-checkbox"
+           [(ngModel)]="isChecked"
+           (change)="onChange(); checkBox.classList.toggle('lv-checkbox--checked')">
+  </div>
+  <ng-content></ng-content>
+</ng-template>

@@ -1,0 +1,23 @@
+<div *ngIf="visible && visibility" class="input-container">
+  <label for="{{id}}"
+         class="input-label {{required && EditMode?'input-label__required':''}} {{alignClass}} {{boldLabel?'bold':''}}">
+    {{ label }}
+  </label>
+  <input
+    #textInput
+    *ngIf="EditMode else readMode"
+    type="text"
+    class="input-content"
+    name="{{id}}"
+    id="{{id}}"
+    [value]="getValue()"
+    (change)="onValueChange(textInput.value)"
+  />
+
+  <ng-template #readMode>
+    <div>
+      <a *ngIf="isLink" class="{{boldLabel?'bold':''}}" (click)="doAction()">{{ value }}</a>
+      <span *ngIf="!isLink" class="{{boldLabel?'bold':''}}">{{ getValue() }}</span>
+    </div>
+  </ng-template>
+</div>

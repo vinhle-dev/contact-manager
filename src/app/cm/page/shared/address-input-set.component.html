@@ -1,0 +1,78 @@
+<label-tb [label]="'Primary Address'"></label-tb>
+<text-input [id]="'Address'"
+            [label]="'Address'"
+            [value]="''"
+            [data]="summaryAddress"
+            [editable]="editable"
+            [hideIfEditable]="true">
+</text-input>
+<typekey-input [id]="'Country'"
+               [label]="'Country'"
+               [options]="countryOptions"
+               [value]="'vendorAvailability'"
+               [data]="contact"
+               [editable]="editable"
+               [hideIfReadOnly]="true">
+</typekey-input>
+<text-input [id]="'Address1'"
+            [label]="'Address 1'"
+            [value]="'address1'"
+            [data]="address"
+            [editable]="editable"
+            [hideIfReadOnly]="true">
+</text-input>
+<text-input [id]="'Address2'"
+            [label]="'Address 2'"
+            [value]="'address2'"
+            [data]="address"
+            [editable]="editable"
+            [hideIfReadOnly]="true">
+</text-input>
+<text-input [id]="'Address3'"
+            [label]="'Address 3'"
+            [value]="'address3'"
+            [data]="address"
+            [editable]="editable"
+            [hideIfReadOnly]="true">
+</text-input>
+<text-input [id]="'City'"
+            [label]="'City'"
+            [value]="'City'"
+            [data]="address"
+            [editable]="editable"
+            [hideIfReadOnly]="true">
+</text-input>
+<typekey-input [id]="'State'"
+               [label]="'State'"
+               [options]="stateOptions"
+               [value]="'state'"
+               [data]="address"
+               [editable]="editable"
+               [hideIfReadOnly]="true">
+</typekey-input>
+<text-input [id]="'ZIPCode'"
+            [label]="'ZIP Code'"
+            [value]="'zipCode'"
+            [data]="address"
+            [editable]="editable"
+            [hideIfReadOnly]="true">
+</text-input>
+<typekey-input [id]="'AddressType'"
+               [label]="'Address Type'"
+               [options]="addressTypeOptions"
+               [value]="'type'"
+               [data]="address"
+               [editable]="editable">
+</typekey-input>
+<text-input [id]="'Description'"
+            [label]="'Description'"
+            [value]="'description'"
+            [data]="address"
+            [editable]="editable">
+</text-input>
+<text-input [id]="'ValidUntil'"
+            [label]="'Valid Until'"
+            [value]="'validUntil'"
+            [data]="address"
+            [editable]="editable">
+</text-input>

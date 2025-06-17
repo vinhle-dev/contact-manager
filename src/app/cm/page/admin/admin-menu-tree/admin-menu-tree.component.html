@@ -1,0 +1,11 @@
+<menu-tree [height]="300" [treeViewTemplateRef]="menuTree">
+</menu-tree>
+
+<ng-template #menuTree>
+  <ng-container *ngIf="treeNode">
+    <tree-view [id]="id"
+               [treeNode]="treeNode"
+               [onClick]="onClick.bind(this)">
+    </tree-view>
+  </ng-container>
+</ng-template>

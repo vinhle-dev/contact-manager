@@ -1,0 +1,21 @@
+<ng-template #template>
+  <div class="lv-data {{EditMode? 'lv-data__edit' :''}}">
+    <ng-container *ngIf="EditMode else readMode">
+      <input
+        type="text"
+        class="lv-cell-input lv-cell-dropdown dropdown-trigger"
+        [value]="getValue()"
+        (click)="dropdown.classList.toggle('dropdown-container__show')"
+      />
+      <div #dropdown class="dropdown-container">
+        <a class="dropdown-item" *ngFor="let option of options" (click)="setValue(option)">
+          {{ getOptionValue(option) }}
+        </a>
+      </div>
+    </ng-container>
+
+    <ng-template #readMode>
+      <div class="lv-cell-text {{isLink? 'lv-cell-text__link' : ''}}">{{ getValue() }}</div>
+    </ng-template>
+  </div>
+</ng-template>

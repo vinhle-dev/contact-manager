@@ -1,0 +1,16 @@
+<div *ngIf="visibility" class="btn-container">
+  <button id="AddRole"
+          class="btn btn__primary btn__available"
+          (click)="add()">
+    <span *ngIf="!addLabel"><span class="text-underline">A</span>dd</span>
+    <span *ngIf="addLabel">{{addLabel}}</span>
+  </button>
+  <button id="RemoveRole"
+          class="btn btn__primary {{listChecked.size > 0? 'btn__available' : 'btn__disable'}}"
+          (click)="remove()">
+    <span *ngIf="!removeLabel"><span class="text-underline">R</span>emove</span>
+    <span *ngIf="removeLabel">{{removeLabel}}</span>
+  </button>
+  <toolbar-divider></toolbar-divider>
+</div>
+

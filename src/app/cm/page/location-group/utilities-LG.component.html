@@ -1,0 +1,18 @@
+<location-group [id]="id"
+                [title]="title"
+                [locationRef]="locationRef">
+</location-group>
+
+<ng-template #locationRef>
+  <location-ref [location]="getLocation(ImportDataPageComponent, 'ab/admin/importdata')"
+                label="Import Data">
+  </location-ref>
+  <location-ref [location]="getLocation(ExportDataPageComponent, 'ab/admin/exportdata')">
+  </location-ref>
+  <location-ref [location]="getLocation( ScriptParametersPageComponent, 'ab/admin/scriptparameters')">
+  </location-ref>
+  <location-ref [location]="getLocation( VendorServicesPageComponent, 'ab/admin/vendorservices')">
+  </location-ref>
+  <location-ref [location]="getLocation( DataChangePageComponent, 'ab/admin/datachange')">
+  </location-ref>
+</ng-template>

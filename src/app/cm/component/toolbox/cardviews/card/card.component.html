@@ -1,0 +1,7 @@
+<div class="card-item"
+     [ngClass]="{'card-item__selected': selected}"
+     (click)="onClick()">{{ label }}
+</div>
+<ng-template #template>
+  <ng-content></ng-content>
+</ng-template>

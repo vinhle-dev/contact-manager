@@ -1,0 +1,109 @@
+.tabbar {
+  display: flex;
+  background-color: $color-grey-light-1;
+  border-bottom: 5px solid $color-grey-dark-1;
+  max-height: 3.5rem;
+  user-select: none;
+
+  &-logo {
+    padding: 0 0.8rem;
+    width: auto;
+  }
+
+  &-container {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-tabs, &-links {
+    display: flex;
+  }
+
+  &-links {
+    justify-content: flex-end;
+  }
+}
+
+.tab {
+  margin-right: 1rem;
+  display: flex;
+  flex-direction: column;
+
+  &-label {
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+  }
+
+  &-content {
+    height: 100%;
+    display: flex;
+    transition: all 0.2s;
+    cursor: pointer;
+
+    &:hover, &__active {
+      background-color: $color-primary-dark-1;
+      color: $color-white;
+    }
+  }
+
+  &-icon {
+    @include backgroundDefault($assets-path + "/img/small-arrow-b.png");
+    border-left: 1px solid $color-grey-light-3;
+    margin-right: 1rem;
+
+    &-box {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &:hover &-icon {
+    @include backgroundDefault($assets-path + "/img/small-arrow-w.png");
+  }
+}
+
+.unsaved-work, setting, quick-jump {
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.unsaved-work-icon {
+  @include backgroundDefault($assets-path + "/img/nav_unsaved_off.png");
+}
+
+
+.setting {
+  &-icon {
+    @include backgroundDefault($assets-path + "/img/nav_preferences.png");
+    padding: 1.1rem;
+    border: 1px solid transparent;
+    border-radius: 3px;
+
+    &:hover {
+      border-color: $color-grey-light-3;
+      opacity: 0.8;
+    }
+  }
+
+  &-divide {
+    height: 50%;
+    border-left: 1px solid $color-grey-light-3;
+    margin-right: .8rem;
+  }
+}
+
+.quick-jump-input {
+  border: 1px solid $color-grey-light-3;
+  border-radius: 3px;
+  background-color: $color-grey-light-1;
+  outline-color: $color-primary;
+  height: 85%;
+  padding-left: .5rem;
+}
+
+
+

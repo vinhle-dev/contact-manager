@@ -1,0 +1,43 @@
+<page [id]="id"
+      [title]="title"
+      [location]="location"
+      [screenRef]="screen"
+      [startInEditMode]="true">
+</page>
+
+<ng-template #screen>
+  <screen>
+    <list-view-input>
+      <toolbar>
+        <iterator-buttons [iterator]="'RoleLV'"
+                          [removeLabel]="'Delete'"
+                          [editable]="true"></iterator-buttons>
+      </toolbar>
+      <list-view>
+        <row-iterator [id]="'RoleLV'"
+                      [listData]="roles"
+                      [names]="['Name', 'Description']"
+                      [toAdd]="{callback: onClickLink, initParams: [pageService,'/ab/admin/role']}"
+                      [toRemove]="{callback: toRemove, initParams: [roles]}"
+                      [editable]="true">
+          <row *ngFor="let role of roles; index as i"
+               [iterator]="'RoleLV'"
+               [rowNumber]="i"
+               [editable]="true">
+
+            <text-cell [id]="'Name'"
+                       [data]="role"
+                       [value]="'name'"
+                       [action]="{callback: onClickLink, initParams: [pageService, '/ab/admin/role/' + role.id]}"
+                       [isLink]="true">
+            </text-cell>
+            <text-cell [id]="'Description'"
+                       [data]="role"
+                       [value]="'description'">
+            </text-cell>
+          </row>
+        </row-iterator>
+      </list-view>
+    </list-view-input>
+  </screen>
+</ng-template>

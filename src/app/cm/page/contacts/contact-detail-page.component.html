@@ -1,0 +1,17 @@
+<page [id]="id"
+      [title]="title"
+      [location]="location"
+      [screenRef]="screen"
+      [infoBar]="infoBar"
+      [afterCancel]="afterCancel.bind(this)"
+      [afterCommit]="afterCommit.bind(this)"
+      [startInEditMode]="true">
+</page>
+
+<ng-template #screen>
+  <contact-detail-screen [contact]="contact"></contact-detail-screen>
+</ng-template>
+
+<ng-template #infoBar>
+  <contact-infobar [contact]="contact"></contact-infobar>
+</ng-template>

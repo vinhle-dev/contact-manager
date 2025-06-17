@@ -1,0 +1,103 @@
+.location {
+  &-body {
+    display: flex;
+    height: 100%;
+
+    &-sidebar {
+      display: flex;
+      flex-direction: column;
+      animation-duration: .7s;
+      user-select: none;
+
+      &__unCollapse {
+        animation-name: unCollapseSidebar;
+        animation-fill-mode: forwards;
+      }
+    }
+
+    &-collapsed-sidebar {
+      width: 2rem;
+      background-color: $color-grey-light-7;
+
+      &__show {
+        animation-name: showCollapsedSidebar;
+        animation-delay: .7s;
+        animation-duration: .1s;
+        animation-fill-mode: backwards;
+      }
+    }
+
+    &-splitter {
+      background-color: $color-grey-light-4;
+      border-left: 1px solid $color-grey-light-5;
+      position: relative;
+      width: .8rem;
+      user-select: none;
+
+      &-icon {
+        position: absolute;
+        cursor: pointer;
+        top: 50%;
+        right: 0;
+
+        @include backgroundWithDimentions($assets-path + "/img/mini-left.png", 0.8rem, 3.5rem);
+
+        &:hover {
+          background-image: url($assets-path + "/img/mini-left-highlight.png");
+        }
+
+        &__hide {
+          @include backgroundWithDimentions($assets-path + "/img/mini-right.png", 0.8rem, 3.5rem);
+
+          &:hover {
+            background-image: url($assets-path + "/img/mini-right-highlight.png");
+          }
+        }
+      }
+    }
+
+    &-content {
+      flex: 1;
+      overflow: auto;
+      padding-bottom: 1rem;
+    }
+  }
+
+  &-group {
+    flex: 1;
+    overflow: auto;
+    padding-bottom: .5rem;
+
+    &-name {
+      padding-left: .6rem;
+    }
+  }
+
+  &-ref {
+    &-name {
+      padding-left: .5rem;
+    }
+  }
+}
+
+@keyframes showCollapsedSidebar {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+
+  100% {
+    width: 2rem;
+    opacity: 1;
+  }
+}
+
+@keyframes unCollapseSidebar {
+  0%,50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

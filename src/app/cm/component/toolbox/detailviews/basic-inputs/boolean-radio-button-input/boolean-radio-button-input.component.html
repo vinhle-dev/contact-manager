@@ -1,0 +1,38 @@
+<div class="input-container">
+  <label for="{{id}}"
+         class="input-label {{required && EditMode?'input-label__required':''}}">
+    {{ label }}
+  </label>
+  <div *ngIf="EditMode else readMode" class="input-radio">
+    <!--  True Value  -->
+    <div class="input-radio-container" (click)="setValue(true)">
+      <input
+        type="button"
+        class="input-radio-content {{getValue()?'input-radio-content--checked':''}}"
+        name="{{id}}_true"
+        id="{{id}}_true"
+      />
+      <label for="{{id}}_true" class="input-label-radio">
+        {{ trueLabel }}
+      </label>
+    </div>
+    <!--  False Value  -->
+    <div class="input-radio-container" (click)="setValue(false)">
+      <input
+        type="button"
+        class="input-radio-content {{!getValue()?'input-radio-content--checked':''}}"
+        name="{{id}}_false"
+        id="{{id}}_false"
+      />
+      <label for="{{id}}_false" class="input-label-radio">
+        {{ falseLabel }}
+      </label>
+    </div>
+  </div>
+
+  <ng-template #readMode>
+    <div>
+      <span>{{ getValue() ? trueLabel : falseLabel }}</span>
+    </div>
+  </ng-template>
+</div>

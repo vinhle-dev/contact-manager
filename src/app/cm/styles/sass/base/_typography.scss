@@ -1,0 +1,26 @@
+h2, h4 {
+  padding-left: .7rem;
+}
+
+.heading-2 {
+  font-weight: bold;
+  font-size: 2.2rem;
+  line-height: 2.5rem;
+  letter-spacing: 1px;
+}
+
+.text-underline {
+  text-decoration: underline;
+}
+
+.redirect-link {
+  padding-left: .7rem;
+  &,
+  &:visited,
+  &:link {
+    cursor: pointer;
+    display: block;
+    text-decoration: underline;
+    color: $color-primary-dark-5;
+  }
+}

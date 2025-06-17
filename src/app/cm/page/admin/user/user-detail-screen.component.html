@@ -1,0 +1,373 @@
+<screen>
+  <toolbar>
+    <edit-buttons></edit-buttons>
+  </toolbar>
+  <card-panel [cardTemplateRef]="card">
+    <ng-template #card>
+      <card label="Basics">
+        <detail-view [id]="'Basics'">
+          <input-column>
+            <typekey-input [id]="'Prefix'"
+                           [label]="'Prefix'"
+                           [options]="prefixOptions"
+                           [value]="'prefix'"
+                           [data]="user"
+                           [editable]="editable">
+            </typekey-input>
+            <text-input [id]="'FName'"
+                        [label]="'First name'"
+                        [value]="'firstName'"
+                        [data]="user"
+                        [editable]="editable"
+                        [required]="true">
+            </text-input>
+            <text-input [id]="'MName'"
+                        [label]="'Middle name'"
+                        [value]="'middleName'"
+                        [data]="user"
+                        [editable]="editable">
+            </text-input>
+            <text-input [id]="'LName'"
+                        [label]="'Last name'"
+                        [value]="'lastName'"
+                        [data]="user"
+                        [editable]="editable"
+                        [required]="true">
+            </text-input>
+            <typekey-input [id]="'Suffix'"
+                           [label]="'Suffix'"
+                           [options]="suffixOptions"
+                           [value]="'suffix'"
+                           [data]="user"
+                           [editable]="editable">
+            </typekey-input>
+            <text-input [id]="'UserName'"
+                        [label]="'User name'"
+                        [value]="'userName'"
+                        [data]="user"
+                        [editable]="editable"
+                        [required]="true">
+            </text-input>
+            <password-input value="password"
+                            [id]="'Password'"
+                            [label]="'Password'"
+                            [data]="user"
+                            [editable]="editable">
+            </password-input>
+            <password-input value="password"
+                            [id]="'CPassword'"
+                            [label]="'Confirm Password'"
+                            [data]="user"
+                            [editable]="editable">
+            </password-input>
+            <boolean-radio-button-input [id]="'Active'"
+                                        [label]="'Active'"
+                                        [value]="'active'"
+                                        [data]="user"
+                                        [required]="true"
+                                        [editable]="editable">
+            </boolean-radio-button-input>
+            <boolean-radio-button-input [id]="'Lock'"
+                                        [label]="'Locked'"
+                                        [value]="'locked'"
+                                        [data]="user"
+                                        [editable]="editable">
+            </boolean-radio-button-input>
+            <typekey-input [id]="'VacationStatus'"
+                           [label]="'Vacation Status'"
+                           [options]="vacationOptions"
+                           [value]="'vacationStatus'"
+                           [data]="user"
+                           [editable]="editable">
+            </typekey-input>
+            <typekey-input [id]="'BackupUser'"
+                           [label]="'Backup User'"
+                           [options]="backupOptions"
+                           [value]="'backupUser'"
+                           [data]="user"
+                           [editable]="editable">
+            </typekey-input>
+            <text-input [id]="'Timeout'"
+                        [label]="'Session timeout (Seconds)'"
+                        [value]="'sectionTimeout'"
+                        [data]="user"
+                        [editable]="editable">
+            </text-input>
+            <input-divider></input-divider>
+            <list-view-input [label]="'Roles'">
+              <toolbar>
+                <iterator-buttons [iterator]="'UserRoleLV'"
+                                  [editable]="editable"></iterator-buttons>
+              </toolbar>
+              <list-view>
+                <row-iterator [id]="'UserRoleLV'"
+                              [listData]="userRoles"
+                              [names]="['Name', 'Description']"
+                              [toAdd]="{callback: toAddRole, initParams: [userRoles]}"
+                              [toRemove]="{callback: toRemoveRole, initParams: [userRoles]}"
+                              [editable]="editable">
+                  <row *ngFor="let userRole of userRoles; index as i"
+                       [iterator]="'UserRoleLV'"
+                       [rowNumber]="i"
+                       [editable]="editable">
+                    <range-cell [id]="'Role'" [data]="userRole"
+                                [value]="'roleId'"
+                                [referenceData]="{data: userRoleService.getRole(userRole.roleId),
+                                           displayValue: 'name',
+                                           updateValue: 'id'}"
+                                [editable]="editable"
+                                [options]="roleService.getAll()">
+                    </range-cell>
+                    <text-cell [id]="'Description'"
+                               [data]="userRoleService.getRole(userRole.roleId)"
+                               [value]="'description'">
+                    </text-cell>
+                  </row>
+                </row-iterator>
+              </list-view>
+            </list-view-input>
+            <input-divider></input-divider>
+            <list-view-input [label]="'Groups'">
+              <toolbar>
+                <iterator-buttons [iterator]="'UserGroupLV'"
+                                  [editable]="editable"></iterator-buttons>
+              </toolbar>
+              <list-view>
+                <row-iterator [id]="'UserGroupLV'"
+                              [listData]="userGroups"
+                              [names]="['Group', 'Member', 'Manager']"
+                              [toAdd]="{callback: toAddGroup, initParams: [user.id, userGroups]}"
+                              [toRemove]="{callback: toRemoveGroup, initParams: [userGroups]}"
+                              [editable]="editable">
+                  <row *ngFor="let userGroup of userGroups; index as i"
+                       [iterator]="'UserGroupLV'"
+                       [rowNumber]="i"
+                       [editable]="editable">
+                    <range-cell [id]="'Group'"
+                                [data]="userGroup"
+                                [value]="'groupId'"
+                                [referenceData]="{data: groupService.getById(userGroup.groupId),
+                                                displayValue: 'name',
+                                                updateValue: 'id'}"
+                                [editable]="editable"
+                                [options]="groupService.getAll()">
+                    </range-cell>
+                    <radio-button-cell [id]="'Member'"
+                                       [data]="userGroup"
+                                       [value]="'member'"
+                                       [editable]="editable">
+                    </radio-button-cell>
+                    <radio-button-cell [id]="'Manager'"
+                                       [data]="userGroup"
+                                       [value]="'manager'"
+                                       [editable]="editable">
+                    </radio-button-cell>
+                  </row>
+                </row-iterator>
+              </list-view>
+            </list-view-input>
+          </input-column>
+        </detail-view>
+      </card>
+      <card label="Profile">
+        <detail-view [id]="'Profile'">
+          <input-column>
+            <label-tb [label]="'Extended Profile'"></label-tb>
+            <text-input [id]="'EmployeeNumber'"
+                        [label]="'Employee Number'"
+                        [value]="'employeeNumber'"
+                        [data]="contact"
+                        [editable]="editable">
+            </text-input>
+            <text-input [id]="'JobTitle'"
+                        [label]="'Job Title'"
+                        [value]="'jobTitle'"
+                        [data]="user"
+                        [editable]="editable">
+            </text-input>
+            <text-input [id]="'Department'"
+                        [label]="'Department'"
+                        [value]="'department'"
+                        [data]="user"
+                        [editable]="editable">
+            </text-input>
+            <input-divider></input-divider>
+            <text-input [id]="'Address'"
+                        [label]="'Address'"
+                        [value]="''"
+                        [data]="summaryAddress"
+                        [editable]="editable"
+                        [visible]="!editable">
+            </text-input>
+            <typekey-input [id]="'Country'"
+                           [label]="'Country'"
+                           [options]="countryOptions"
+                           [value]="'country'"
+                           [data]="address"
+                           [editable]="editable"
+                           [visible]="editable">
+            </typekey-input>
+            <text-input [id]="'Address1'"
+                        [label]="'Address 1'"
+                        [value]="'address1'"
+                        [data]="address"
+                        [editable]="editable"
+                        [visible]="editable">
+            </text-input>
+            <text-input [id]="'Address2'"
+                        [label]="'Address 2'"
+                        [value]="'address2'"
+                        [data]="address"
+                        [editable]="editable"
+                        [visible]="editable">
+            </text-input>
+            <text-input [id]="'Address3'"
+                        [label]="'Address 3'"
+                        [value]="'address3'"
+                        [data]="address"
+                        [editable]="editable"
+                        [visible]="editable">
+            </text-input>
+            <text-input [id]="'City'"
+                        [label]="'City'"
+                        [value]="'city'"
+                        [data]="address"
+                        [editable]="editable"
+                        [visible]="editable">
+            </text-input>
+            <text-input [id]="'County'"
+                        [label]="'County'"
+                        [value]="'county'"
+                        [data]="address"
+                        [editable]="editable"
+                        [visible]="editable">
+            </text-input>
+            <typekey-input [id]="'State'"
+                           [label]="'State'"
+                           [options]="stateOptions"
+                           [value]="'state'"
+                           [data]="address"
+                           [editable]="editable"
+                           [visible]="editable">
+            </typekey-input>
+            <text-input [id]="'ZIPCode'"
+                        [label]="'ZIP Code'"
+                        [value]="'zipCode'"
+                        [data]="address"
+                        [editable]="editable"
+                        [visible]="editable">
+            </text-input>
+            <input-divider></input-divider>
+            <typekey-input [id]="'PrimaryPhone'"
+                           [label]="'Primary Phone'"
+                           [options]="phoneOptions"
+                           [value]="'primaryPhone'"
+                           [data]="phone"
+                           [editable]="editable">
+            </typekey-input>
+            <text-input [id]="'Home'"
+                        [label]="'Home'"
+                        [value]="'home'"
+                        [data]="phone"
+                        [editable]="editable">
+            </text-input>
+            <text-input [id]="'Fax'"
+                        [label]="'Fax'"
+                        [value]="'fax'"
+                        [data]="phone"
+                        [editable]="editable">
+            </text-input>
+            <text-input [id]="'Mobile'"
+                        [label]="'Mobile'"
+                        [value]="'mobile'"
+                        [data]="phone"
+                        [editable]="editable">
+            </text-input>
+            <text-input [id]="'Work'"
+                        [label]="'Work'"
+                        [value]="'work'"
+                        [data]="phone"
+                        [editable]="editable">
+            </text-input>
+            <input-divider></input-divider>
+            <text-input [id]="'Email'"
+                        [label]="'Email'"
+                        [value]="'emailAddress1'"
+                        [data]="contact"
+                        [editable]="editable">
+            </text-input>
+            <input-divider></input-divider>
+            <typekey-input [id]="'ExperienceLevel'"
+                           [label]="'Experience Level'"
+                           [options]="experienceOptions"
+                           [value]="'experienceLevel'"
+                           [data]="user"
+                           [editable]="editable">
+            </typekey-input>
+            <typekey-input [id]="'RegionalFormat'"
+                           [label]="'Regional Format'"
+                           [options]="regionalOptions"
+                           [value]="'userLocal'"
+                           [data]="user"
+                           [editable]="editable">
+            </typekey-input>
+            <typekey-input [id]="'DefaultCountry'"
+                           [label]="'Default Country'"
+                           [options]="countryOptions"
+                           [value]="'userDefaultCountry'"
+                           [data]="user"
+                           [editable]="editable">
+            </typekey-input>
+            <typekey-input [id]="'DefaultPhoneRegion'"
+                           [label]="'Default Phone Region'"
+                           [options]="phoneRegionOptions"
+                           [value]="'userDefaultPhoneCountry'"
+                           [data]="user"
+                           [editable]="editable">
+            </typekey-input>
+            <boolean-radio-button-input [id]="'External User'"
+                                        [label]="'External User'"
+                                        [value]="'externalUser'"
+                                        [data]="user"
+                                        [editable]="editable"
+                                        [required]="true">
+            </boolean-radio-button-input>
+          </input-column>
+        </detail-view>
+      </card>
+      <card label="Regions">
+        <detail-view [id]="'Regions'">
+          <list-view-input>
+            <toolbar>
+              <iterator-buttons [iterator]="'RegionLV'"
+                                [editable]="editable"></iterator-buttons>
+            </toolbar>
+            <list-view>
+              <row-iterator [id]="'RegionLV'"
+                            [listData]="regions"
+                            [names]="['Name', 'Zones']"
+                            [toAdd]="{callback: toAddRegion, initParams: [pageService, 'ab/admin/regions/regionsearch/0/' + user.id]}"
+                            [toRemove]="{callback: toRemoveRegion, initParams: [regions]}"
+                            [editable]="editable">
+                <row *ngFor="let region of regions; index as i"
+                     [iterator]="'RegionLV'"
+                     [rowNumber]="i"
+                     [editable]="editable">
+                  <text-cell [id]="'Name'"
+                             [data]="region"
+                             [value]="'name'"
+                             [editable]="editable">
+                  </text-cell>
+                  <text-cell [id]="'Zones'"
+                             [data]="region"
+                             [value]="'zones'">
+                  </text-cell>
+                </row>
+              </row-iterator>
+            </list-view>
+          </list-view-input>
+        </detail-view>
+      </card>
+    </ng-template>
+  </card-panel>
+</screen>

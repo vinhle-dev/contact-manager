@@ -1,0 +1,54 @@
+<screen>
+  <card-panel [cardTemplateRef]="card">
+    <ng-template #card>
+      <card label="Updates (0)">
+        <list-view-input [id]="'Updates'">
+          <list-view>
+            <row-iterator [id]="'UpdatesLV'"
+                          [listData]="updateContacts"
+                          [names]="['Contact', 'Request User', 'Related To']"
+                          [editable]="editable">
+              <row *ngFor="let contact of updateContacts; index as i"
+                   [iterator]="'UpdatesLV'"
+                   [rowNumber]="i"
+                   [editable]="editable">
+                <text-cell [value]="''" [data]="''" [id]="''">
+                </text-cell>
+                <text-cell [value]="''" [data]="''" [id]="''">
+                </text-cell>
+                <text-cell [value]="''" [data]="''" [id]="''">
+                </text-cell>
+              </row>
+            </row-iterator>
+          </list-view>
+        </list-view-input>
+      </card>
+      <card label="Creates (0)">
+        <list-view-input [id]="'Creates'">
+          <list-view>
+            <row-iterator [id]="'CreatesLV'"
+                          [listData]="updateContacts"
+                          [names]="['Contact', 'Type', 'Tags', 'Request User', 'Related To']"
+                          [editable]="editable">
+              <row *ngFor="let contact of createContacts; index as i"
+                   [iterator]="'CreatesLV'"
+                   [rowNumber]="i"
+                   [editable]="editable">
+                <text-cell [value]="''" [data]="''" [id]="''">
+                </text-cell>
+                <text-cell [value]="''" [data]="''" [id]="''">
+                </text-cell>
+                <text-cell [value]="''" [data]="''" [id]="''">
+                </text-cell>
+                <text-cell [value]="''" [data]="''" [id]="''">
+                </text-cell>
+                <text-cell [value]="''" [data]="''" [id]="''">
+                </text-cell>
+              </row>
+            </row-iterator>
+          </list-view>
+        </list-view-input>
+      </card>
+    </ng-template>
+  </card-panel>
+</screen>

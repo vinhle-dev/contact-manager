@@ -1,0 +1,74 @@
+<ng-container>
+  <!-- Node -->
+  <ng-container [ngTemplateOutlet]="nodeTemplate"
+                [ngTemplateOutletContext]="{
+                  element: treeNode.object,
+                  isNode: true,
+                  name: treeNode.name,
+                  nodeId: treeNode.id,
+                  nodeLevel: treeNode.nodeLevel,
+                  hasChildren: baseTreeNode.hasChildren(treeNode)
+                  }">
+  </ng-container>
+  <ng-container *ngIf="arrowStatus"
+                [ngTemplateOutlet]="nodeContent">
+  </ng-container>
+</ng-container>
+
+<ng-template #nodeContent>
+  <!-- Node children -->
+  <ng-container *ngFor="let node of treeNode.children.nodes">
+    <tree-view [treeNode]="node"
+               [id]="id"
+               [onClick]="onClick">
+    </tree-view>
+  </ng-container>
+  <!-- Node items -->
+  <ng-container *ngFor="let item of treeNode.children.items"
+                [ngTemplateOutlet]="nodeTemplate"
+                [ngTemplateOutletContext]="{
+                element: item.object,
+                isNode: false,
+                name: item.name,
+                nodeId: item.id,
+                nodeLevel: item.nodeLevel,
+                hasChildren: false
+                }">
+  </ng-container>
+</ng-template>
+
+<ng-template #nodeTemplate
+             let-element="element"
+             let-isNode="isNode"
+             let-name="name"
+             let-nodeId="nodeId"
+             let-nodeLevel="nodeLevel"
+             let-hasChildren="hasChildren">
+  <div class="tree-view-item"
+       [id]="nodeId"
+       [ngClass]="{'tree-view-item__selected': selectedItem === nodeId}"
+       (click)="onClickItem(element, nodeId)">
+    <ng-container *ngIf="nodeLevel > 0">
+      <ng-container *ngFor="let i of [].constructor(nodeLevel)" [ngTemplateOutlet]="space"></ng-container>
+    </ng-container>
+    <div *ngIf="hasChildren; else space"
+         [id]="nodeId"
+         [ngClass]="{'tree-view-item-arrow-right': !arrowStatus, 'tree-view-item-arrow-down': arrowStatus}"
+         class="tree-view-item-arrow-right"
+         (click)="onClickArrow($event, nodeId)">
+    </div>
+    <div class="tree-view-item-name">
+      <div *ngIf="isNode; else fileIcon" class="tree-view-item-folder"></div>
+      <div>{{ name }}</div>
+    </div>
+  </div>
+
+  <ng-template #fileIcon>
+    <div class="tree-view-item-space"></div>
+    <div class="tree-view-item-file"></div>
+  </ng-template>
+
+  <ng-template #space>
+    <div class="tree-view-item-space"></div>
+  </ng-template>
+</ng-template>

@@ -1,0 +1,66 @@
+<screen>
+  <search-panel [searchCriteria]="regionCriteria"
+                [searchResults]="regions"
+                [search]="[{callback: search, initParams: [regionService, regions]}]">
+    <panel-ref>
+      <detail-view [id]="'ContactSearchDV'">
+        <input-column>
+          <text-input [id]="'Name'"
+                      [label]="'Region Name'"
+                      [data]="regionCriteria"
+                      [value]="'name'"
+                      [editable]="editable">
+          </text-input>
+          <text-input [id]="'ZoneType'"
+                      [label]="'Zone Type'"
+                      [data]="regionCriteria"
+                      [value]="'type'">
+          </text-input>
+          <text-input [id]="'Code'"
+                      [label]="'Code'"
+                      [data]="regionCriteria"
+                      [value]="'Code'"
+                      [editable]="editable">
+          </text-input>
+        </input-column>
+        <input-footer>
+          <search-and-reset-input-set></search-and-reset-input-set>
+        </input-footer>
+      </detail-view>
+    </panel-ref>
+    <panel-ref>
+      <title-bar [title]="'Search Results'"></title-bar>
+      <list-view-input>
+        <toolbar>
+          <checked-value-toolbar-button
+            [iterator]="'RegionSearchLV'"
+            [id]="'Select'"
+            [label]="'Select'"
+            [action]="Action">
+          </checked-value-toolbar-button>
+          <toolbar-divider></toolbar-divider>
+        </toolbar>
+        <list-view>
+          <row-iterator [id]="'RegionSearchLV'"
+                        [listData]="regions"
+                        [names]="['Name', 'Areas Covered']"
+                        [editable]="editable">
+            <row *ngFor="let region of regions; index as i"
+                 [iterator]="'RegionSearchLV'"
+                 [rowNumber]="i"
+                 [editable]="editable">
+              <text-cell [id]="'Name'"
+                         [data]="region"
+                         [value]="'name'">
+              </text-cell>
+              <text-cell [id]="'Zones'"
+                         [data]="region"
+                         [value]="'zones'">
+              </text-cell>
+            </row>
+          </row-iterator>
+        </list-view>
+      </list-view-input>
+    </panel-ref>
+  </search-panel>
+</screen>

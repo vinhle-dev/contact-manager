@@ -1,0 +1,10 @@
+<page [id]="id"
+      [title]="title"
+      [location]="location"
+      [screenRef]="screen"
+      [startInEditMode]="true">
+</page>
+
+<ng-template #screen>
+  <admin-group-search-screen [groupCriteria]="groupCriteria"></admin-group-search-screen>
+</ng-template>

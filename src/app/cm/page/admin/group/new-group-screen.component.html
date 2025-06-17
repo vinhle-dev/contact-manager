@@ -1,0 +1,84 @@
+<screen>
+  <toolbar>
+    <edit-buttons></edit-buttons>
+  </toolbar>
+
+  <detail-view [id]="'NewGroupDV'">
+    <input-column>
+      <text-input [id]="'Name'"
+                  [label]="'Name'"
+                  [value]="'name'"
+                  [data]="group"
+                  [editable]="editable"
+                  [required]="true">
+      </text-input>
+      <typekey-input [id]="'Type'"
+                     [label]="'Type'"
+                     [options]="typeOptions"
+                     [value]="'type'"
+                     [data]="group"
+                     [editable]="editable"
+                     [required]="true">
+      </typekey-input>
+      <typekey-input [id]="'Parent'"
+                     [label]="'Parent'"
+                     [options]="parentOptions"
+                     [value]="'parent'"
+                     [data]="group"
+                     [referenceData]="{data:this.groupService.getRootGroup(), displayValue:'name', updateValue:'id'}"
+                     [editable]="editable"
+                     [required]="true">
+      </typekey-input>
+      <typekey-input [id]="'Supervisor'"
+                     [label]="'Supervisor'"
+                     [options]="supervisorOptions"
+                     [value]="'supervisor'"
+                     [data]="group"
+                     [editable]="editable"
+                     [required]="true">
+      </typekey-input>
+
+      <list-view-input [label]="'Users'">
+        <toolbar>
+          <iterator-buttons [iterator]="'UserLV'"
+                            [editable]="editable"></iterator-buttons>
+        </toolbar>
+        <list-view>
+          <row-iterator [id]="'UserLV'"
+                        [listData]="userGroups"
+                        [names]="['User', 'Member', 'Manager', 'Proximity Search Status']"
+                        [toAdd]="{callback: toAddUserGroup, initParams: [userGroups]}"
+                        [toRemove]="{callback: toRemoveUserGroup, initParams: [userGroups]}"
+                        [editable]="editable">
+            <row *ngFor="let userGroup of userGroups; index as i"
+                 [iterator]="'UserLV'"
+                 [rowNumber]="i"
+                 [editable]="editable">
+              <range-cell [id]="'User'"
+                          [data]="userGroup"
+                          [value]="'userId'"
+                          [referenceData]="{data: userService.getById(userGroup.userId),
+                                                displayValue: 'name',
+                                                updateValue: 'id'}"
+                          [editable]="editable"
+                          [options]="userService.getAll()">
+              </range-cell>
+              <radio-button-cell [id]="'Member'"
+                                 [data]="userGroup"
+                                 [value]="'member'"
+                                 [editable]="editable"></radio-button-cell>
+              <radio-button-cell [id]="'Manager'"
+                                 [data]="userGroup"
+                                 [value]="'manager'"
+                                 [editable]="editable"></radio-button-cell>
+              <text-cell [id]="'ProximityStatus'"
+                         [data]="userGroup"
+                         [value]="'proximityStatus'">
+              </text-cell>
+            </row>
+          </row-iterator>
+        </list-view>
+      </list-view-input>
+    </input-column>
+  </detail-view>
+</screen>

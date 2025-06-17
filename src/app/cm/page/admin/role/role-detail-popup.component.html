@@ -1,0 +1,11 @@
+<popup [id]="id"
+       [title]="title"
+       [location]="location"
+       [screenRef]="screen"
+       [afterCancel]="afterCancel.bind(this)"
+       [afterCommit]="afterCommit.bind(this)">
+</popup>
+
+<ng-template #screen>
+  <role-detail-screen [role]="role"></role-detail-screen>
+</ng-template>

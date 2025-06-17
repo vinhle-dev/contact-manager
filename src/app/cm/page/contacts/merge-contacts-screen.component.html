@@ -1,0 +1,80 @@
+<screen>
+  <search-panel [searchCriteria]="duplicateContactCriteria"
+                [searchResults]="contacts"
+                [search]="[]">
+    <panel-ref>
+      <detail-view [id]="'MergeContactSearchDV'">
+        <input-column>
+          <text-input [id]="'Name'"
+                      [label]="'Company/Last Name'"
+                      [data]="duplicateContactCriteria"
+                      [value]="'name'"
+                      [editable]="editable">
+          </text-input>
+          <typekey-input [id]="'MatchType'"
+                         [label]="'Match Type'"
+                         [value]="'matchType'"
+                         [data]="duplicateContactCriteria"
+                         [options]="matchTypeOptions"
+                         [editable]="editable"
+                         [required]="true">
+          </typekey-input>
+        </input-column>
+        <input-column>
+          <check-box [id]="'LastRunOnly'"
+                     [label]="'Last Run Only'"
+                     [value]="'isLastRun'"
+                     [data]="duplicateContactCriteria"
+                     [editable]="editable">
+          </check-box>
+          <text-input [id]="'RunsAfter'"
+                      [label]="'Runs After'"
+                      [data]="duplicateContactCriteria"
+                      [value]="'runAfter'"
+                      [editable]="editable">
+          </text-input>
+        </input-column>
+        <input-footer>
+          <search-and-reset-input-set></search-and-reset-input-set>
+        </input-footer>
+      </detail-view>
+    </panel-ref>
+    <panel-ref>
+      <title-bar [title]="'Search Results'"></title-bar>
+      <list-view-input>
+        <toolbar>
+          <checked-value-toolbar-button
+            [iterator]="'MergeContactSearchResultsLV'"
+            [id]="'IgnoreButton'"
+            [label]="'Ignore'">
+          </checked-value-toolbar-button>
+          <toolbar-divider [editable]="editable"></toolbar-divider>
+        </toolbar>
+        <list-view>
+          <row-iterator [id]="'MergeContactSearchResultsLV'"
+                        [listData]="contacts"
+                        [names]="[' ', 'Match Type', 'Date Detected', 'Name', 'Address', 'Phone', 'Tax ID']">
+            <row *ngFor="let contact of contacts; index as i"
+                 [iterator]="'MergeContactSearchResultsLV'"
+                 [rowNumber]="i">
+              <text-cell [value]="''" [data]="''" [id]="''">
+              </text-cell>
+              <text-cell [value]="''" [data]="''" [id]="''">
+              </text-cell>
+              <text-cell [value]="''" [data]="''" [id]="''">
+              </text-cell>
+              <text-cell [value]="''" [data]="''" [id]="''">
+              </text-cell>
+              <text-cell [value]="''" [data]="''" [id]="''">
+              </text-cell>
+              <text-cell [value]="''" [data]="''" [id]="''">
+              </text-cell>
+              <text-cell [value]="''" [data]="''" [id]="''">
+              </text-cell>
+            </row>
+          </row-iterator>
+        </list-view>
+      </list-view-input>
+    </panel-ref>
+  </search-panel>
+</screen>

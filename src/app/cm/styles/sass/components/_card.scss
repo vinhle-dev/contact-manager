@@ -1,0 +1,26 @@
+.card {
+  &-group {
+    display: flex;
+    padding: 0.2rem 0 0 0.2rem;
+    background-color: $color-grey-light-1;
+    border-top: 1px solid $color-grey-light-5;
+    border-bottom: 1px solid $color-grey-light-5;
+  }
+
+  &-item {
+    color: $color-primary-dark-2;
+    margin: 0 0.5rem -1px 0;
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+
+    &__selected {
+      color: $color-primary-dark-1;
+      font-weight: bold;
+      border: 1px solid $color-grey-light-5;
+      border-bottom-color: transparent;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      background-color: $color-white;
+    }
+  }
+}

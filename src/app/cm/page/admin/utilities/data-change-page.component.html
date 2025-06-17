@@ -1,0 +1,60 @@
+<page [id]="id"
+      [title]="title"
+      [location]="location"
+      [screenRef]="screen"
+      [startInEditMode]="true">
+</page>
+
+<ng-template #screen>
+  <screen>
+    <toolbar>
+      <toolbar-filter [name]="'filter'"
+                      [iterator]="'DataChangeLV'"
+                      [editable]="true"
+                      [filterOptions]="filterOptions">
+      </toolbar-filter>
+    </toolbar>
+    <list-view-input>
+      <list-view>
+        <row-iterator [id]="'DataChangeLV'"
+                      [listData]="dataChange"
+                      [names]="['Reference', 'Description', 'Status', 'Create by', 'Create on', 'Executed by', 'Executed']"
+                      [editable]="true">
+          <row *ngFor="let data of dataChange; index as i"
+               [iterator]="'DataChangeLV'"
+               [rowNumber]="i"
+               [editable]="true">
+            <text-cell [id]="'Value'"
+                       [data]="data"
+                       [value]="'reference'">
+            </text-cell>
+            <text-cell [id]="'Value'"
+                       [data]="data"
+                       [value]="'description'">
+            </text-cell>
+            <text-cell [id]="'Value'"
+                       [data]="data"
+                       [value]="'status'">
+            </text-cell>
+            <text-cell [id]="'Value'"
+                       [data]="data"
+                       [value]="'createBy'">
+            </text-cell>
+            <text-cell [id]="'Value'"
+                       [data]="data"
+                       [value]="'createOn'">
+            </text-cell>
+            <text-cell [id]="'Value'"
+                       [data]="data"
+                       [value]="'executedBy'">
+            </text-cell>
+            <text-cell [id]="'Value'"
+                       [data]="data"
+                       [value]="'executed'">
+            </text-cell>
+          </row>
+        </row-iterator>
+      </list-view>
+    </list-view-input>
+  </screen>
+</ng-template>

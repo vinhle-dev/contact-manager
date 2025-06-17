@@ -1,0 +1,54 @@
+.detail-view {
+  display: block;
+
+  &:has(.input-column) {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    grid-template-columns: repeat(auto-fill, minmax(min-content, 1fr));
+  }
+}
+
+.input {
+  &-column {
+    padding-left: 1rem;
+    padding-right: .7rem;
+    margin-top: .4rem;
+    margin-bottom: .2rem;
+  }
+
+  &-toolbar {
+    grid-row: 1;
+  }
+
+  &-header {
+    grid-row: 2;
+  }
+
+  &-body {
+    grid-row: 3;
+
+    &:not(:first-of-type) &-container {
+      border-left: solid 1px #a9bfd3;
+      padding-left: 1rem;
+    }
+  }
+
+  &-footer {
+    grid-row: 4;
+  }
+
+  &-divider {
+    margin-top: .7rem;
+    margin-bottom: .6rem;
+
+    &--primary {
+      border-bottom: 1px solid $color-primary-light-3;
+    }
+  }
+}
+
+
+.label {
+  font-weight: bold;
+}
+

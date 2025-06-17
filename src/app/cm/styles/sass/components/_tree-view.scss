@@ -1,0 +1,55 @@
+.tree-view {
+  &-item {
+    display: flex;
+    padding: .7rem 0 .7rem .6rem;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+
+    &-arrow {
+      &-right {
+        @include backgroundDefault($assets-path + "/img/menu-arrow-right.png");
+        margin-left: .5rem;
+      }
+
+      &-down {
+        @include backgroundDefault($assets-path + "/img/menu-arrow-bottom.png");
+        margin: .4rem .4rem -.3rem .1rem;
+      }
+    }
+
+    &-file {
+      @include backgroundDefault($assets-path + "/img/leaf.png");
+      margin-left: .1rem;
+      margin-right: 1rem;
+    }
+
+    &-folder {
+      @include backgroundDefault($assets-path + "/img/folder.png");
+      margin-left: .2rem;
+      margin-right: 1rem;
+
+      &-open {
+        @include backgroundDefault($assets-path + "/img/folder-open.png");
+        margin-right: 1rem;
+      }
+    }
+
+    &-name {
+      display: flex;
+    }
+
+    &:hover:not(&__selected) {
+      background-color: $color-primary-light-1;
+    }
+
+    &__selected {
+      color: $color-white;
+      background-color: $color-primary-dark-1;
+    }
+
+    &-space {
+      padding-left: 2.2rem
+    }
+  }
+}

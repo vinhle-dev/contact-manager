@@ -1,0 +1,170 @@
+.lv {
+  &-title {
+    display: grid;
+    grid-template-columns: minmax(12rem, auto) 1fr;
+
+    &__above {
+      display: flex;
+      flex-flow: column;
+    }
+  }
+
+  &-label {
+    padding-top: 1rem;
+  }
+
+  &-container {
+    display: flex;
+    border: 1px solid #b1b1b1;
+    min-width: max-content;
+
+    &:has(.lv-header) {
+      display: grid;
+      grid-template-columns: 3.5rem;
+      grid-auto-rows: minmax(3rem, auto);
+      grid-auto-columns: minmax(max-content, auto);
+    }
+  }
+
+  &-check-column {
+    grid-column: 1;
+    display: flex;
+    min-height: 2.5rem;
+    align-items: center;
+    padding: 0 !important;
+  }
+
+  &-checkbox {
+    display: block;
+    margin: auto;
+  }
+
+  &-header, &-data, &-blank {
+    border: 1px solid transparent;
+    padding: .5rem;
+  }
+
+  &-header, &-blank {
+    grid-row: 1;
+    background-color: #f4f3f0;
+    border-right: 1px solid silver;
+    border-bottom: 1px solid silver;
+  }
+
+  &-header {
+    color: #0067ac;
+    padding-right: 2rem;
+
+    &:not(.lv-check-column) {
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        right: 0.1rem;
+        top: 0;
+        border-left: 1px solid #b1b1b1;
+        min-height: 100%;
+        @include backgroundDefaultWithPosition($assets-path + "/img/menu-arrow-bottom.png", top 1.2rem right 0.3rem);
+        visibility: hidden;
+      }
+    }
+
+    &:hover {
+      background-color: #e8f0fe;
+
+      &:not(.lv-check-column) {
+        cursor: pointer;
+      }
+
+      &::after {
+        visibility: visible;
+      }
+    }
+  }
+
+  &-data {
+    border-right: 1px solid #ededed;
+    border-bottom: 1px solid #ededed;
+    word-wrap: break-word;
+    overflow: auto;
+
+    &__edit {
+      @include backgroundWithPosition($assets-path + "/img/editable.png", left 0.1rem top 0.1rem);
+    }
+  }
+
+  &-cell {
+    &-text {
+      display: flex;
+      align-items: center;
+      min-height: 2.5rem;
+
+      &__link {
+        &,
+        &:visited,
+        &:link {
+          display: block;
+          text-decoration: none;
+          color: #0067ac;
+          cursor: pointer;
+          pointer-events: auto;
+        }
+      }
+    }
+
+    &-input {
+      min-height: 2.5rem;
+      color: #333a3f;
+      border: none;
+      border-radius: 3px;
+      padding-left: .8rem;
+
+      &:focus {
+        outline: 1px solid #3591d3;
+      }
+    }
+
+    &-radio {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      min-height: 2.5rem;
+
+      &-button {
+        background-color: transparent;
+        border: 0;
+        width: 15px;
+        height: 15px;
+        @include backgroundWithPosition($assets-path + "/img/radio.png", 0 0);
+
+        &__checked {
+          background-position: 0 -15px;
+        }
+      }
+
+      &-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid transparent;
+        border-right: 1px solid #ededed;
+        border-bottom: 1px solid #ededed;
+      }
+
+      &-label {
+        padding-left: .6rem;
+        pointer-events: none;
+      }
+    }
+
+    &-link {
+      display: flex;
+      align-items: center;
+    }
+
+    &-dropdown:focus {
+      @include backgroundWithPosition($assets-path + "/img/menu-arrow-bottom.png", right .7rem top .9rem);
+    }
+  }
+}

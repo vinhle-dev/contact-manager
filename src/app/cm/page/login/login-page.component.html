@@ -1,0 +1,60 @@
+<div class="login">
+  <div class="login-box">
+    <img ngSrc="assets/img/login.png"
+         alt="Log in logo"
+         class="login-img"
+         height="124"
+         width="522"
+         priority/>
+    <div class="login-form">
+      <div class="login-message">
+        <p>{{ error }}</p>
+      </div>
+      <label for="userName" class="login-form-label">User Name</label>
+      <input type="text"
+             id="userName"
+             class="login-form-input"
+             [(ngModel)]="credential.username">
+      <label for="password" class="login-form-label">Password</label>
+      <input type="password"
+             id="password"
+             class="login-form-input"
+             [(ngModel)]="credential.password">
+      <button #button
+              class="btn btn__primary btn__available login-button"
+              type="submit"
+              (click)="onSubmit()">
+        Log In
+      </button>
+    </div>
+  </div>
+
+
+  <!--<screen [id]="'LoginScreen'">
+    <detail-view [id]="'LoginDV'">
+      <input-column>
+        <text-input [id]="'UserName'"
+                    [label]="'User Name'"
+                    [value]="'username'"
+                    [alignLabel]="'right'"
+                    [editable]="true"
+                    [data]="credential">
+        </text-input>
+        <password-input value="password"
+                        [id]="'Password'"
+                        [label]="'Password'"
+                        [data]="credential"
+                        [alignLabel]="'right'"
+                        [editable]="true">
+        </password-input>
+        <div class="input-container">
+          <button #button class="btn btn__primary btn__available login-button"
+                  type="submit"
+                  (click)="onSubmit()">
+            Log In
+          </button>
+        </div>
+      </input-column>
+    </detail-view>
+  </screen>-->
+</div>

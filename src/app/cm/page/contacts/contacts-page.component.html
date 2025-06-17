@@ -1,0 +1,10 @@
+<page [id]="id"
+      [title]="title"
+      [location]="location"
+      [screenRef]="screen"
+      [startInEditMode]="true">
+</page>
+
+<ng-template #screen>
+  <contact-search-screen [contactCriteria]="contactCriteria"></contact-search-screen>
+</ng-template>

@@ -1,0 +1,6 @@
+<div #item [id]="id" class="card-group">
+  <ng-container *ngTemplateOutlet="cardTemplateRef"></ng-container>
+</div>
+<div *ngIf="contentTemplateRef">
+  <ng-container *ngTemplateOutlet="contentTemplateRef"></ng-container>
+</div>

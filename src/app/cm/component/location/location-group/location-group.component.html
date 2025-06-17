@@ -1,0 +1,20 @@
+<ng-container *ngIf="IsRoot; else notRoot">
+  <ng-container [ngTemplateOutlet]="locationRef"></ng-container>
+</ng-container>
+
+<ng-template #notRoot>
+  <div class="tree-view-item"
+       (click)="onClick()">
+    <ng-container *ngFor="let i of [].constructor(NodeLevel)"
+                  [ngTemplateOutlet]="space">
+    </ng-container>
+    <div class="tree-view-item-arrow-right"
+         [ngClass]="{'tree-view-item-arrow-down': isSelect}"></div>
+    <div class="location-group-name">{{ title }}</div>
+  </div>
+  <ng-container *ngIf="isSelect" [ngTemplateOutlet]="locationRef"></ng-container>
+
+  <ng-template #space>
+    <div class="tree-view-item-space"></div>
+  </ng-template>
+</ng-template>

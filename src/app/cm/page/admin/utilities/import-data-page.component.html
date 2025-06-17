@@ -1,0 +1,32 @@
+<page [id]="id"
+      [title]="title"
+      [location]="location"
+      [screenRef]="screen"
+      [startInEditMode]="true">
+</page>
+
+<ng-template #screen>
+  <screen>
+    <toolbar>
+      <toolbar-button [id]="'Cancel'"
+                      [label]="'Cancel'"
+                      [shortcut]="'l'">
+      </toolbar-button>
+      <toolbar-divider [editable]="true"></toolbar-divider>
+      <toolbar-button [id]="'Next'"
+                      [label]="'Next >'">
+      </toolbar-button>
+      <toolbar-button [id]="'Finish'"
+                      [label]="'Finish'"
+                      [shortcut]="'F'">
+      </toolbar-button>
+    </toolbar>
+    <detail-view [id]="'ImportDataDV'">
+      <input-column>
+        <label-tb [label]="'Please browse for an administrative data file to upload'"></label-tb>
+        <input type="text" placeholder="-">
+        <button class="btn btn__primary">Browse...</button>
+      </input-column>
+    </detail-view>
+  </screen>
+</ng-template>

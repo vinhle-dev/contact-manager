@@ -1,0 +1,10 @@
+<page [id]="id"
+      [title]="title"
+      [location]="location"
+      [screenRef]="screen"
+      [startInEditMode]="true">
+</page>
+
+<ng-template #screen>
+  <regions-screen [regions]="regions"></regions-screen>
+</ng-template>

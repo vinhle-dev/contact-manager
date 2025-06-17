@@ -1,0 +1,35 @@
+<screen>
+  <detail-view [id]="'AddRegionDV'">
+    <toolbar>
+      <edit-buttons></edit-buttons>
+    </toolbar>
+    <input-column>
+      <label-tb [label]="'Region'"></label-tb>
+      <input-divider></input-divider>
+      <text-input [id]="'Name'"
+                  [label]="'Name'"
+                  [required]="true"
+                  [value]="'name'"
+                  [data]="region"
+                  [editable]="editable">
+      </text-input>
+      <typekey-input [id]="'AreasCovered'"
+                     [label]="'Areas Covered'"
+                     [value]="'zones'"
+                     [data]="region"
+                     [options]="stateOptions"
+                     [editable]="editable">
+      </typekey-input>
+      <text-input [id]="'Country'"
+                  [label]="'Country'"
+                  [value]="'country'"
+                  [data]="region">
+      </text-input>
+      <text-input [id]="'Type'"
+                  [label]="'Type'"
+                  [value]="'type'"
+                  [data]="region">
+      </text-input>
+    </input-column>
+  </detail-view>
+</screen>

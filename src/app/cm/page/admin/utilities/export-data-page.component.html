@@ -1,0 +1,34 @@
+<page [id]="id"
+      [title]="title"
+      [location]="location"
+      [screenRef]="screen"
+      [startInEditMode]="true">
+</page>
+
+<ng-template #screen>
+  <screen>
+    <detail-view [id]="'ImportDataDV'">
+      <input-column>
+        <label-tb [label]="'Export Administrative Data'"></label-tb>
+        <typekey-input [id]="'Data'"
+                       [label]="'Data to Export'"
+                       [data]="exportCriteria"
+                       [value]="'data'"
+                       [options]="dataOptions"
+                       [editable]="true">
+        </typekey-input>
+        <button class="btn btn__primary">Export</button>
+        <label-tb [label]="'Export Security Dictionary'"></label-tb>
+        <typekey-input [id]="'Format'"
+                       [label]="'Output Format'"
+                       [required]="true"
+                       [data]="exportCriteria"
+                       [value]="'format'"
+                       [options]="formatOptions"
+                       [editable]="true">
+        </typekey-input>
+        <button class="btn btn__primary">Export</button>
+      </input-column>
+    </detail-view>
+  </screen>
+</ng-template>

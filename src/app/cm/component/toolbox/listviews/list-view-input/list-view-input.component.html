@@ -1,0 +1,6 @@
+<div #view class="{{label ? labelAbove ? 'lv-title__above' : 'lv-title' : ''}}">
+  <div *ngIf="label" class="lv-label {{boldLabel?'bold':''}}">{{ label }}</div>
+  <div>
+    <ng-content></ng-content>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+<div *ngIf="icon" class="link-icon">
+  <img ngSrc="assets/img/{{icon}}.png" width="16" height="16" alt="">
+</div>
+<div *ngIf="!icon" class="link {{getStyle()}}" (click)="doAction()">
+  {{label}}
+</div>

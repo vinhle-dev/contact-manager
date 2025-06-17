@@ -1,0 +1,13 @@
+<ng-container *ngComponentOutlet="location"></ng-container>
+
+<ng-template #pageTempRef>
+  <div class="page-title">
+    <h2 class="heading-2">{{ title }}</h2>
+    <a *ngIf="parent.title && parent.url"
+         class="redirect-link"
+         (click)="returnParent()">
+      Up to {{ parent.title }}
+    </a>
+  </div>
+  <ng-container [ngTemplateOutlet]="screenRef"></ng-container>
+</ng-template>

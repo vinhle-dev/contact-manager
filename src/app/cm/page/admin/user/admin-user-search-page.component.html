@@ -1,0 +1,10 @@
+<page [id]="id"
+      [title]="title"
+      [location]="location"
+      [screenRef]="screen"
+      [startInEditMode]="true">
+</page>
+
+<ng-template #screen>
+  <user-search-screen [userCriteria]="userCriteria"></user-search-screen>
+</ng-template>

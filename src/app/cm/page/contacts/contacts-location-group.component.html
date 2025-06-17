@@ -1,0 +1,13 @@
+<location-group [id]="id"
+                [title]="title"
+                [locationRef]="locationRef">
+</location-group>
+
+<ng-template #locationRef>
+  <location-ref [location]="getLocation(ContactsPageComponent, 'ab/contacts')">
+  </location-ref>
+  <location-ref [location]="getLocation(MergeContactsPageComponent, 'ab/contacts/merge')">
+  </location-ref>
+  <location-ref [location]="getLocation(PendingChangesPageComponent, 'ab/contacts/pendingchanges')">
+  </location-ref>
+</ng-template>

@@ -1,0 +1,19 @@
+<ng-container *ngIf="IsPage; else locationGroup">
+  <div class="tree-view-item"
+       [ngClass]="{'tree-view-item__selected': isSelect}"
+       (click)="onClick()">
+    <div class="tree-view-item-space"></div>
+    <ng-container *ngFor="let i of [].constructor(NodeLevel)"
+                  [ngTemplateOutlet]="space">
+    </ng-container>
+    <div class="location-ref-name">{{label ? label : location.title}}</div>
+  </div>
+</ng-container>
+
+<ng-template #locationGroup>
+  <ng-container *ngComponentOutlet="location.component"></ng-container>
+</ng-template>
+
+<ng-template #space>
+  <div class="tree-view-item-space"></div>
+</ng-template>

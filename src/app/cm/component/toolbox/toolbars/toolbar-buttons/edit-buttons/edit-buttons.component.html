@@ -1,0 +1,17 @@
+<ng-container *ngIf="editMode else editButton">
+  <button class="btn btn__primary btn__available"
+          (click)="update()">
+    <span class="text-underline">U</span>pdate
+  </button>
+  <button class="btn btn__primary btn__available"
+          (click)="cancel()">
+    Cance<span class="text-underline">l</span>
+  </button>
+</ng-container>
+
+<ng-template #editButton>
+  <button class="btn btn__primary btn__available"
+          (click)="edit()">
+    <span class="text-underline">E</span>dit
+  </button>
+</ng-template>

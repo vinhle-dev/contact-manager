@@ -1,0 +1,33 @@
+<div #header>
+  <ng-container *ngComponentOutlet="Tabbar"/>
+  <ng-container *ngTemplateOutlet="infoBar"/>
+</div>
+<div class="location-body"
+     [ngClass]="{'cursor-resize': isResizing}"
+     [style.height]="(window.innerHeight - header.offsetHeight) + 'px'">
+  <div #collapsedSidebar [ngClass]="{'location-body-collapsed-sidebar':isSidebarCollapse}"></div>
+  <div #sidebar
+       class="location-body-sidebar"
+       [ngClass]="{'scrolling': isResizing}"
+       [style.width]="isSidebarCollapse ? 0 : currentSidebarWidth + 'px'">
+    <ng-container *ngComponentOutlet="menuAction"/>
+    <ng-container *ngComponentOutlet="menuTree"/>
+    <div class="location-group">
+      <ng-container *ngComponentOutlet="locationGroup"></ng-container>
+    </div>
+  </div>
+
+  <div class="location-body-splitter"
+       [style.cursor]="isSidebarCollapse ? 'auto' : 'col-resize'"
+       (mousedown)="startDraggingSplitter($event)">
+    <i class="location-body-splitter-icon"
+       [ngClass]="{'location-body-splitter-icon__hide': isSidebarCollapse}"
+       (click)="onSplitterClick(sidebar, collapsedSidebar)"
+       (mousedown)="$event.stopPropagation()"></i>
+  </div>
+
+  <div class="location-body-content"
+       [ngClass]="{'scrolling': isResizing}">
+    <ng-container [ngTemplateOutlet]="pageTempRef"></ng-container>
+  </div>
+</div>

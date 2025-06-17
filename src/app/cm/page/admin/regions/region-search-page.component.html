@@ -1,0 +1,13 @@
+<page [id]="id"
+      [title]="title"
+      [location]="location"
+      [screenRef]="screen"
+      [startInEditMode]="true">
+</page>
+
+<ng-template #screen>
+  <region-search-screen [user]="user"
+                        [group]="group"
+                        [regionCriteria]="regionCriteria">
+  </region-search-screen>
+</ng-template>

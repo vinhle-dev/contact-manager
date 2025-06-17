@@ -1,0 +1,58 @@
+<screen>
+  <search-panel [searchCriteria]="groupCriteria"
+                [searchResults]="groups"
+                [search]="[{callback: search, initParams: [groupService, groups]}]">
+    <panel-ref>
+      <detail-view [id]="'GroupCriteriaDV'">
+        <input-column>
+          <text-input [id]="'GroupName'"
+                      [label]="'Group Name'"
+                      [value]="'name'"
+                      [data]="groupCriteria"
+                      [editable]="editable">
+          </text-input>
+          <label-tb [label]="'Additional Restrictions'"></label-tb>
+          <input-divider></input-divider>
+          <typekey-input [id]="'GroupType'"
+                         [label]="'Group Type'"
+                         [value]="'groupType'"
+                         [data]="groupCriteria"
+                         [options]="typeOptions"
+                         [editable]="editable">
+          </typekey-input>
+        </input-column>
+        <input-footer>
+          <search-and-reset-input-set></search-and-reset-input-set>
+        </input-footer>
+      </detail-view>
+    </panel-ref>
+    <panel-ref>
+      <title-bar [title]="'Search Results'"></title-bar>
+      <toolbar></toolbar>
+      <list-view-input>
+        <list-view>
+          <row-iterator [id]="'GroupSearchResultsLV'"
+                        [listData]="groups"
+                        [names]="['Name', 'Parent Group', 'Type']">
+            <row *ngFor="let group of groups; index as i"
+                 [iterator]="'GroupSearchResultsLV'"
+                 [rowNumber]="i">
+              <text-cell [id]="'Name'"
+                         [data]="group"
+                         [value]="'name'">
+              </text-cell>
+              <text-cell [id]="'ParentName'"
+                         [data]="groupService.getParentName(group.parent)"
+                         [value]="''">
+              </text-cell>
+              <text-cell [id]="'Type'"
+                         [data]="group"
+                         [value]="'type'">
+              </text-cell>
+            </row>
+          </row-iterator>
+        </list-view>
+      </list-view-input>
+    </panel-ref>
+  </search-panel>
+</screen>

@@ -1,0 +1,13 @@
+<location-group [id]="id"
+                [title]="title"
+                [locationRef]="locationRef">
+</location-group>
+
+<ng-template #locationRef>
+  <location-ref [location]="getLocation(UsersAndSecurityLGComponent)">
+  </location-ref>
+  <location-ref [location]="getLocation(MonitoringLGComponent)">
+  </location-ref>
+  <location-ref [location]="getLocation(UtilitiesLGComponent)">
+  </location-ref>
+</ng-template>

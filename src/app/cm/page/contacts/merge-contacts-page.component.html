@@ -1,0 +1,11 @@
+<page [id]="id"
+      [title]="title"
+      [location]="location"
+      [screenRef]="screen"
+      [startInEditMode]="true">
+</page>
+
+<ng-template #screen>
+  <merge-contacts-screen [duplicateContactCriteria]="duplicateContactCriteria">
+  </merge-contacts-screen>
+</ng-template>

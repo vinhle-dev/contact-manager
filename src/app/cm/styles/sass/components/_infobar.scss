@@ -1,0 +1,26 @@
+.infoBar {
+  display: flex;
+  flex-flow: row;
+  height: 4.7rem;
+  background-color: $color-grey-dark-1;
+  background-image: linear-gradient(to bottom, $color-grey-dark-4, $color-grey-dark-1 20%);
+  overflow: hidden;
+  align-items: center;
+  padding-left: .7rem;
+
+  &-element {
+    display: flex;
+    padding-left: .3rem;
+    flex-flow: row;
+    background-color: transparent;
+    text-align: center;
+    white-space: nowrap;
+    color: $color-white;
+    font-size: 1.4rem;
+
+    &-value {
+      font-weight: bold;
+      padding-left: .4rem;
+    }
+  }
+}

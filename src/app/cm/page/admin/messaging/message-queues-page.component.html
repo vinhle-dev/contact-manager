@@ -1,0 +1,67 @@
+<page [id]="id"
+      [title]="title"
+      [location]="location"
+      [screenRef]="screen"
+      [startInEditMode]="true">
+</page>
+
+<ng-template #screen>
+  <screen [id]="'MessageQueuesScreen'"
+          [title]="'Message Queues'">
+    <toolbar>
+      <checked-value-toolbar-button [id]="'Suspend'"
+                                    [iterator]="'DestinationsLV'"
+                                    [label]="'Suspend'"
+                                    [shortcut]="'S'">
+      </checked-value-toolbar-button>
+      <checked-value-toolbar-button [id]="'Resume'"
+                                    [iterator]="'DestinationsLV'"
+                                    [label]="'Resume'"
+                                    [shortcut]="'e'">
+      </checked-value-toolbar-button>
+      <checked-value-toolbar-button [id]="'Restart'"
+                                    [iterator]="'DestinationsLV'"
+                                    [label]="'Restart'"
+                                    [shortcut]="'a'">
+      </checked-value-toolbar-button>
+      <toolbar-divider [editable]="true"></toolbar-divider>
+      <toolbar-button [id]="'RestartMessaging'"
+                      [label]="'Restart Messaging Engine'"
+                      [shortcut]="'R'">
+      </toolbar-button>
+      <toolbar-divider [editable]="true"></toolbar-divider>
+    </toolbar>
+    <list-view-input>
+      <list-view>
+        <row-iterator [id]="'DestinationsLV'"
+                      [listData]="destinations"
+                      [names]="['Destination', 'Id', 'Status', 'Server Id']"
+                      [editable]="true">
+          <row *ngFor="let destination of destinations; index as i"
+               [iterator]="'DestinationsLV'"
+               [rowNumber]="i"
+               [editable]="true">
+            <text-cell [id]="'Name'"
+                       [data]="destination"
+                       [value]="'name'"
+                       [isLink]="true">
+            </text-cell>
+            <text-cell [id]="'Id'"
+                       [data]="destination"
+                       [value]="'id'"
+                       [isLink]="true">
+            </text-cell>
+            <text-cell [id]="'Status'"
+                       [data]="destination"
+                       [value]="'status'">
+            </text-cell>
+            <text-cell [id]="'ServerId'"
+                       [data]="destination"
+                       [value]="'serverId'">
+            </text-cell>
+          </row>
+        </row-iterator>
+      </list-view>
+    </list-view-input>
+  </screen>
+</ng-template>

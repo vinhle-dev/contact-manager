@@ -1,0 +1,90 @@
+.input {
+  &-container {
+    display: grid;
+    grid-template-columns: 15.5rem 17.5rem minmax(min-content, 30rem);
+    align-items: center;
+    gap: 0.2rem;
+    height: 3rem;
+  }
+
+  &-label {
+    display: flex;
+    justify-content: space-between;
+
+    &-radio {
+      cursor: pointer;
+    }
+
+    &__required::after {
+      content: "";
+      margin-top: -0.2rem;
+      @include backgroundDefault($assets-path + "/img/required.png");
+    }
+  }
+
+  &-content {
+    border-radius: 3px;
+    min-height: 2.5rem;
+    padding-left: 0.4rem;
+    color: $color-grey-dark-2;
+    background-color: $color-grey-light-1;
+    border: 1px solid $color-grey-light-2;
+
+    &:focus {
+      outline: 1px solid $color-primary-dark-3;
+    }
+  }
+
+  &-radio {
+    display: grid;
+    grid-template-columns: repeat(2, min-content);
+    gap: 1rem;
+
+    &-container {
+      display: grid;
+      grid-template-columns: min-content 1fr;
+      gap: 0.5rem;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    &-content {
+      @include backgroundWithPosition($assets-path + "/img/radio.png", unset);
+      background-color: transparent;
+      border: 0;
+      height: 1.5rem;
+      width: 1.5rem;
+      cursor: pointer;
+
+      &--checked {
+        @include backgroundWithPosition($assets-path + "/img/radio.png", 0 -15px);
+      }
+
+      &:focus {
+        outline: 1px dotted;
+        @include backgroundWithPosition($assets-path + "/img/radio.png", -15px -15px);
+      }
+    }
+  }
+
+  &-check-box {
+    @include backgroundWithPosition($assets-path + "/img/checkbox.png", unset);
+    background-color: transparent;
+    border: 0;
+    height: 1.5rem;
+    width: 1.5rem;
+    cursor: pointer;
+
+    &:focus {
+      @include backgroundWithPosition($assets-path + "/img/checkbox.png", -15px 0);
+    }
+
+    &--checked {
+      @include backgroundWithPosition($assets-path + "/img/checkbox.png", 0 -15px);
+
+      &:focus {
+        @include backgroundWithPosition($assets-path + "/img/checkbox.png", -15px -15px);
+      }
+    }
+  }
+}

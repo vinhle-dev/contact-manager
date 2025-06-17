@@ -1,0 +1,19 @@
+<div *ngIf="visible" class="input-container">
+  <label for="{{id}}"
+         class="input-label {{required && EditMode?'input-label__required':''}} {{alignClass}}">
+    {{ label }}
+  </label>
+  <input
+    *ngIf="EditMode else readMode"
+    type="button"
+    class="input-check-box {{getValue()?'input-check-box--checked':''}}"
+    name="{{id}}_true"
+    id="{{id}}_true"
+    (click)="setValue(!getValue())"/>
+
+  <ng-template #readMode>
+    <div>
+      <span>{{ getValue() ? "Yes" : "No" }}</span>
+    </div>
+  </ng-template>
+</div>

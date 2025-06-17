@@ -1,0 +1,44 @@
+<div class="tabbar">
+  <img class="tabbar-logo"
+       [ngSrc]="'../../../../../../assets/img/logo.png'"
+       alt="Contact Manager Logo"
+       (click)="onClickLogo()"
+       width="200"
+       height="30"
+       priority=""/>
+  <div class="tabbar-container">
+    <div class="tabbar-tabs">
+      <ng-container *ngTemplateOutlet="tabsTemplate ? tabsTemplate : defaultTabsTemplate"></ng-container>
+    </div>
+    <div class="tabbar-links">
+      <ng-container *ngTemplateOutlet="linksTemplate ? linksTemplate : defaultLinksTemplate"></ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #defaultTabsTemplate>
+  <tab [id]="'Contacts'"
+       [label]="'Contacts'"
+       [shortcut]="'o'"
+       [dropdownTemplate]="contactsDropdownItems"
+       [action]="{callback: onClickTab, initParams: [router, 'ab/contacts', 'Contacts']}"></tab>
+  <tab [id]="'Administration'"
+       [label]="'Administration'"
+       [shortcut]="'m'"
+       [action]="{callback: onClickTab, initParams: [router, 'ab/admin', 'Administration']}"></tab>
+</ng-template>
+
+<ng-template #defaultLinksTemplate>
+  <quick-jump></quick-jump>
+  <unsaved-work></unsaved-work>
+  <setting></setting>
+</ng-template>
+
+<ng-template #contactsDropdownItems>
+  <a (click)="onClickTab(router, '/ab/contacts')"
+     class="dropdown-item dropdown-item-tab">Search</a>
+  <a (click)="onClickTab(router, '/ab/contacts/merge')"
+     class="dropdown-item dropdown-item-tab">Merge Contacts</a>
+  <a (click)="onClickTab(router, '/ab/contacts/pendingchanges')"
+     class="dropdown-item dropdown-item-tab">Pending Changes (0)</a>
+</ng-template>

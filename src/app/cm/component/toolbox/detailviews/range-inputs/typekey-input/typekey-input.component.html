@@ -1,0 +1,34 @@
+<div *ngIf="visible && visibility" class="input-container">
+  <label for="{{id}}"
+         class="input-label {{required && EditMode?'input-label__required':''}}">
+    {{ label }}
+  </label>
+  <div class="dropdown">
+    <div *ngIf="EditMode else readMode">
+      <input
+        type="text"
+        class="input-content dropdown-btn dropdown-trigger"
+        name="{{id}}"
+        id="{{id}}"
+        autocomplete="off"
+        [value]="getValue()"
+        (click)="dropdown.classList.toggle('dropdown-container__show')"
+      />
+      <div #dropdown class="dropdown-container">
+        <a #item
+           *ngFor="let option of options"
+           class="dropdown-item {{getValue() === getOptionValue(option) ? 'dropdown-item__selected' : ''}}"
+           (click)="onSelect(dropdown, item, option)">
+          {{ getOptionValue(option) }}
+        </a>
+      </div>
+    </div>
+
+    <ng-template #readMode>
+      <div>
+        <span>{{ getValue() }}</span>
+      </div>
+    </ng-template>
+  </div>
+</div>
+

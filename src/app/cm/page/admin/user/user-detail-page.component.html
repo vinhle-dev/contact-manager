@@ -1,0 +1,16 @@
+<page [id]="id"
+      [title]="title"
+      [location]="location"
+      [screenRef]="screen"
+      [afterCancel]="afterCancel.bind(this)"
+      [afterCommit]="afterCommit.bind(this)"
+      [startInEditMode]="this.user.id === null">
+</page>
+
+<ng-template #screen>
+  <user-detail-screen [regions]="regions"
+                      [user]="user"
+                      [userGroups]="userGroups"
+                      [userRoles]="userRoles">
+  </user-detail-screen>
+</ng-template>

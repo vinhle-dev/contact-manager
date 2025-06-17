@@ -1,0 +1,6 @@
+<div *ngFor="let paragraph of label.split('\n'); index as i">
+  <br *ngIf="i > 0">
+  <p class="verbatim-text {{warning?'verbatim-text__warning':''}}">{{ paragraph }}</p>
+</div>
+
+

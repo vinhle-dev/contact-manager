@@ -1,0 +1,144 @@
+<screen>
+  <search-panel [searchCriteria]="contactCriteria"
+                [searchResults]="contacts"
+                [search]="[{callback: search, initParams: [contactService, contacts]}]">
+    <panel-ref>
+      <detail-view [id]="'ContactSearchDV'">
+        <input-column>
+          <typekey-input [id]="'ContactType'"
+                         [label]="'Contact Type'"
+                         [value]="'contactType'"
+                         [data]="contactCriteria"
+                         [options]="typeOptions"
+                         [editable]="editable"
+                         [required]="true">
+          </typekey-input>
+          <text-input [id]="'Name'"
+                      [label]="'Company/Last Name'"
+                      [data]="contactCriteria"
+                      [value]="'name'"
+                      [editable]="editable">
+          </text-input>
+          <typekey-input [id]="'Tags'"
+                         [label]="'Tags'"
+                         [value]="'tag'"
+                         [data]="contactCriteria"
+                         [options]="tagOptions"
+                         [editable]="editable">
+          </typekey-input>
+          <boolean-radio-button-input [id]="'TagsRequired'"
+                                      [label]="'Tags Required'"
+                                      [value]="'tagRequired'"
+                                      [data]="contactCriteria"
+                                      [trueLabel]="'All'"
+                                      [falseLabel]="'Any'"
+                                      [editable]="editable">
+          </boolean-radio-button-input>
+          <typekey-input [id]="'AvailableForWork'"
+                         [label]="'Available for Work'"
+                         [value]="'availableForWork'"
+                         [data]="contactCriteria"
+                         [options]="availableOptions"
+                         [editable]="editable">
+          </typekey-input>
+          <check-box [id]="'IncludePendingCreates'"
+                     [label]="'Include Pending Creates'"
+                     [value]="'pendingCreate'"
+                     [data]="contactCriteria"
+                     [editable]="editable">
+          </check-box>
+        </input-column>
+        <input-column>
+          <label-tb [label]="'Location'"></label-tb>
+          <typekey-input [id]="'Country'"
+                         [label]="'Country'"
+                         [value]="'country'"
+                         [data]="contactCriteria"
+                         [options]="countryOptions"
+                         [editable]="editable">
+          </typekey-input>
+          <text-input [id]="'City'"
+                      [label]="'City'"
+                      [data]="contactCriteria"
+                      [value]="'city'"
+                      [editable]="editable">
+          </text-input>
+          <typekey-input [id]="'State'"
+                         [label]="'State'"
+                         [value]="'state'"
+                         [data]="contactCriteria"
+                         [options]="stateOptions"
+                         [editable]="editable">
+          </typekey-input>
+          <text-input [id]="'ZIPCode'"
+                      [label]="'ZIP Code'"
+                      [data]="contactCriteria"
+                      [value]="'zipCode'"
+                      [editable]="editable">
+          </text-input>
+        </input-column>
+        <input-footer>
+          <search-and-reset-input-set></search-and-reset-input-set>
+        </input-footer>
+      </detail-view>
+    </panel-ref>
+    <panel-ref>
+      <title-bar [title]="'Search Results'"></title-bar>
+      <list-view-input>
+        <toolbar>
+          <checked-value-toolbar-button
+            [iterator]="'ContactSearchResultsLV'"
+            [id]="'DeleteButton'"
+            [label]="'Delete'"
+            [shortcut]="'l'">
+          </checked-value-toolbar-button>
+          <toolbar-divider [editable]="editable"></toolbar-divider>
+        </toolbar>
+        <list-view>
+          <row-iterator [id]="'ContactSearchResultsLV'"
+                        [listData]="contacts"
+                        [names]="['Name', 'Address', 'City', 'State', 'ZIP Code', 'Phone #', 'Contact Type', 'Available for Work', 'Review Score']">
+            <row *ngFor="let contact of contacts; index as i"
+                 [iterator]="'ContactSearchResultsLV'"
+                 [rowNumber]="i">
+              <text-cell value="name"
+                         id="Name"
+                         [data]="contact"
+                         [action]="{callback: viewContact, initParams: [contact.id, router]}"
+                         [isLink]="true">
+              </text-cell>
+              <text-cell value="address1"
+                         id="Address"
+                         [data]="contactService.getAddress(contact)">
+              </text-cell>
+              <text-cell value="city"
+                         id="City"
+                         [data]="contactService.getAddress(contact)">
+              </text-cell>
+              <text-cell value="state"
+                         id="State"
+                         [data]="contactService.getAddress(contact)">
+              </text-cell>
+              <text-cell value="zipCode"
+                         id="ZipCode"
+                         [data]="contactService.getAddress(contact)">
+              </text-cell>
+              <text-cell value="work"
+                         id="Work"
+                         [data]="contactService.getAddress(contact)">
+              </text-cell>
+              <text-cell value="type"
+                         id="Type"
+                         [data]="contact">
+              </text-cell>
+              <text-cell [value]="''" [data]="''" [id]="''">
+              </text-cell>
+              <text-cell [value]="''" [data]="''" [id]="''">
+              </text-cell>
+            </row>
+          </row-iterator>
+        </list-view>
+      </list-view-input>
+    </panel-ref>
+  </search-panel>
+</screen>

@@ -1,0 +1,15 @@
+<location-group [id]="id"
+                [title]="title"
+                [locationRef]="locationRef">
+</location-group>
+
+<ng-template #locationRef>
+  <location-ref [location]="getLocation(AdminUserSearchPageComponent, 'ab/admin/users')">
+  </location-ref>
+  <location-ref [location]="getLocation(AdminGroupSearchPageComponent, 'ab/admin/groups')">
+  </location-ref>
+  <location-ref [location]="getLocation(RolesPageComponent, 'ab/admin/roles')">
+  </location-ref>
+  <location-ref [location]="getLocation(RegionsPageComponent, 'ab/admin/regions')">
+  </location-ref>
+</ng-template>

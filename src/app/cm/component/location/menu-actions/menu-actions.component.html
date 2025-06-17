@@ -1,0 +1,12 @@
+<div class="menu-actions">
+  <div (click)="dropdown.classList.toggle('dropdown-container__show')"
+       class="menu-actions-button dropdown-trigger">
+    <p><span class="text-underline pointer-events__none">A</span>ctions</p>
+    <div class="menu-actions-button-icon pointer-events__none"></div>
+  </div>
+  <div class="dropdown">
+    <div #dropdown class="dropdown-container">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

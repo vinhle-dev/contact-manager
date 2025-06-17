@@ -1,0 +1,12 @@
+<page [id]="id"
+      [title]="title"
+      [location]="location"
+      [screenRef]="screen"
+      [afterCommit]="afterCommit.bind(this)"
+      [afterCancel]="afterCancel.bind(this)"
+      [startInEditMode]="true">
+</page>
+
+<ng-template #screen>
+  <add-region-screen [region]="region"></add-region-screen>
+</ng-template>

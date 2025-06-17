@@ -1,0 +1,36 @@
+.btn {
+  padding: 0.4rem 0.8rem;
+  color: $color-white;
+  border-radius: 2px;
+  border: 1px solid;
+  font-size: 1.2rem;
+
+  &__primary {
+    border-color: $color-primary;
+    background-color: $color-primary;
+
+    &:hover {
+      background-color: $color-primary-dark-4;
+    }
+  }
+
+  &__available {
+    cursor: pointer;
+  }
+
+  &__disable {
+    cursor: auto;
+    border-color: $color-grey-dark-3;
+    background-color: $color-grey-dark-3;
+
+    &:hover {
+      background-color: $color-grey-dark-3;
+    }
+  }
+
+  &-container {
+    display: flex;
+    gap: .8rem;
+    align-items: center;
+  }
+}

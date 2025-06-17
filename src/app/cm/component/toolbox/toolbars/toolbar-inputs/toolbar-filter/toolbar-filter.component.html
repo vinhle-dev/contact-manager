@@ -1,0 +1,25 @@
+<div *ngIf="visibility" class="toolbar-filter">
+  <label for="filter"
+         class="input-label input-label__required">
+    {{ label }}
+  </label>
+  <div class="dropdown">
+    <input
+      #filter
+      type="text"
+      class="input-content dropdown-btn dropdown-trigger"
+      id="filter"
+      autocomplete="off"
+      [defaultValue]="filterOptions[0]"
+      (click)="dropdown.classList.toggle('dropdown-container__show')"
+    />
+    <div #dropdown class="dropdown-container">
+      <a #item
+         *ngFor="let option of filterOptions"
+         class="dropdown-item {{filter.value === option ? 'dropdown-item__selected' : ''}}"
+         (click)="onSelect(filter, dropdown, item, option)">
+        {{ option }}
+      </a>
+    </div>
+  </div>
+</div>

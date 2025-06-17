@@ -1,0 +1,427 @@
+<screen>
+  <card-panel [cardTemplateRef]="card">
+    <ng-template #card>
+      <card label="Basics">
+        <detail-view [id]="'Basics'">
+          <toolbar>
+            <edit-buttons></edit-buttons>
+            <toolbar-divider [editable]="editable"
+                             [hideIfEditable]="true">
+            </toolbar-divider>
+            <toolbar-button [id]="'Delete'"
+                            [label]="'Delete'"
+                            [shortcut]="'l'"
+                            [editable]="editable"
+                            [hideIfEditable]="true">
+            </toolbar-button>
+          </toolbar>
+          <input-column>
+            <label-tb [label]="'Vendor (Company)'"></label-tb>
+            <text-input [id]="'name'"
+                        [label]="'Name'"
+                        [value]="'name'"
+                        [data]="contact"
+                        [editable]="editable"
+                        [required]="true">
+            </text-input>
+            <typekey-input [id]="'Tags'"
+                           [label]="'Tags'"
+                           [options]="tagOptions"
+                           [value]="'tag'"
+                           [data]="contact"
+                           [editable]="editable"
+                           [required]="true">
+            </typekey-input>
+            <typekey-input [id]="'AvailableForWork'"
+                           [label]="'Available for Work'"
+                           [options]="availableOptions"
+                           [value]="'vendorAvailability'"
+                           [data]="contact"
+                           [editable]="editable"
+                           [required]="true">
+            </typekey-input>
+            <input-divider></input-divider>
+            <address-input-set [address]="primaryAddress"
+                               [contact]="contact"
+                               [editable]="editable">
+            </address-input-set>
+          </input-column>
+          <input-column>
+            <input-divider></input-divider>
+            <label-tb [label]="'Additional Info'"></label-tb>
+            <boolean-radio-button-input [id]="'PreferredVendor'"
+                                        [label]="'Preferred Vendor?'"
+                                        [value]="'preferred'"
+                                        [data]="contact"
+                                        [editable]="editable"
+                                        [required]="true">
+            </boolean-radio-button-input>
+            <input-divider></input-divider>
+            <label-tb [label]="'Contact Info'"></label-tb>
+            <typekey-input [id]="'PrimaryContact'"
+                           [label]="'Primary Contact'"
+                           [options]="[]"
+                           [value]="'primaryContact'"
+                           [data]="contact"
+                           [editable]="editable">
+            </typekey-input>
+            <text-input [id]="'Phone'"
+                        [label]="'Phone'"
+                        [value]="'work'"
+                        [data]="phone"
+                        [editable]="editable">
+            </text-input>
+            <text-input [id]="'Fax'"
+                        [label]="'Fax'"
+                        [value]="'fax'"
+                        [data]="phone"
+                        [editable]="editable">
+            </text-input>
+            <text-input [id]="'MainEmail'"
+                        [label]="'Main Email'"
+                        [value]="'emailAddress1'"
+                        [data]="contact"
+                        [editable]="editable">
+            </text-input>
+            <text-input [id]="'AlternateEmail'"
+                        [label]="'Alternate Email'"
+                        [value]="'emailAddress2'"
+                        [data]="contact"
+                        [editable]="editable">
+            </text-input>
+            <input-divider></input-divider>
+            <label-tb [label]="'Tax Info'"></label-tb>
+            <text-input [id]="'TaxID'"
+                        [label]="'Tax ID (EIN)'"
+                        [value]="'taxId'"
+                        [data]="contact"
+                        [editable]="editable">
+            </text-input>
+            <boolean-radio-button-input [id]="'W9Received'"
+                                        [label]="'W-9 Received?'"
+                                        [value]="'w9Received'"
+                                        [data]="contact"
+                                        [editable]="editable">
+            </boolean-radio-button-input>
+            <text-input [id]="'W9ReceivedDate'"
+                        [label]="'W-9 Received Date'"
+                        [value]="'w9ReceivedDate'"
+                        [data]="contact"
+                        [editable]="editable">
+            </text-input>
+            <text-input [id]="'W9ValidFrom'"
+                        [label]="'W-9 Valid from'"
+                        [value]="'w9ValidFrom'"
+                        [data]="contact"
+                        [editable]="editable">
+            </text-input>
+            <text-input [id]="'W9ValidTo'"
+                        [label]="'W-9 Valid to'"
+                        [value]="'w9ValidTo'"
+                        [data]="contact"
+                        [editable]="editable">
+            </text-input>
+            <input-divider></input-divider>
+            <text-input [id]="'Notes'"
+                        [label]="'Notes'"
+                        [boldLabel]="true"
+                        [value]="'notes'"
+                        [data]="contact"
+                        [editable]="editable">
+            </text-input>
+          </input-column>
+          <input-footer>
+            <input-divider></input-divider>
+            <list-view-input [label]="'EFT Information'" [boldLabel]="true">
+              <toolbar>
+                <iterator-buttons [iterator]="'EFTInformationLV'"
+                                  [editable]="editable">
+                </iterator-buttons>
+              </toolbar>
+              <list-view>
+                <row-iterator [id]="'EFTInformationLV'"
+                              [listData]="eftRecords"
+                              [names]="['Account Name', 'Bank Name', 'Account Type', 'Account Number', 'Routing number', 'Primary']"
+                              [toAdd]="{callback: toAddEFTData, initParams: [eftRecords]}"
+                              [toRemove]="{callback: toRemoveEFTData, initParams: [eftRecords]}"
+                              [editable]="editable">
+                  <row *ngFor="let eft of eftRecords; index as i"
+                       [iterator]="'EFTInformationLV'"
+                       [rowNumber]="i"
+                       [editable]="editable">
+                    <text-cell id="AccountName"
+                               [data]="eft"
+                               value="accountName"
+                               [editable]="editable">
+                    </text-cell>
+                    <text-cell id="BankName"
+                               [data]="eft"
+                               value="bankName"
+                               [editable]="editable">
+                    </text-cell>
+                    <range-cell id="AccountType"
+                                [data]="eft"
+                                value="accountType"
+                                [editable]="editable"
+                                [options]="accountTypeOptions">
+                    </range-cell>
+                    <text-cell id="AccountNumber"
+                               [data]="eft"
+                               value="accountNumber"
+                               [editable]="editable">
+                    </text-cell>
+                    <text-cell id="RoutingNumber"
+                               [data]="eft"
+                               value="routingNumber"
+                               [editable]="editable">
+                    </text-cell>
+                    <radio-button-cell id="Primary"
+                                       [data]="eft"
+                                       value="primary"
+                                       [editable]="editable">
+                    </radio-button-cell>
+                  </row>
+                </row-iterator>
+              </list-view>
+            </list-view-input>
+          </input-footer>
+        </detail-view>
+      </card>
+      <card label="Address">
+        <list-detail-panel [id]="'Address'">
+          <toolbar>
+            <edit-buttons></edit-buttons>
+            <toolbar-divider [editable]="editable">
+            </toolbar-divider>
+            <iterator-buttons [iterator]="'AddressLV'"
+                              [editable]="editable">
+            </iterator-buttons>
+            <toolbar-button [id]="'Refresh'"
+                            [label]="'Refresh'"
+                            [editable]="editable"
+                            [available]="false"
+                            [hideIfReadOnly]="true">
+            </toolbar-button>
+          </toolbar>
+          <list-view>
+            <row-iterator [id]="'AddressLV'"
+                          [listData]="addresses"
+                          [names]="['Primary', 'Type', 'Address']"
+                          [toAdd]="{callback: toAddAddress, initParams: [addresses]}"
+                          [toRemove]="{callback: toRemoveAddress, initParams: [addresses]}"
+                          [editable]="editable">
+              <row *ngFor="let address of addresses; index as i"
+                   [iterator]="'AddressLV'"
+                   [rowNumber]="i"
+                   [editable]="editable">
+                <radio-button-cell [id]="'Primary'"
+                                   [data]="this.addressService.isPrimary(contact.id, address.id)"
+                                   [value]="''"
+                                   [editable]="editable">
+                </radio-button-cell>
+                <range-cell [id]="'Type'"
+                            [data]="address"
+                            [value]="'type'"
+                            [options]="addressTypeOptions">
+                </range-cell>
+                <text-cell [id]="'Type'"
+                           [data]="address.SummaryAddress"
+                           [value]="''">
+                </text-cell>
+              </row>
+            </row-iterator>
+          </list-view>
+          <card-panel [cardTemplateRef]="card1">
+            <ng-template #card1>
+              <card label="Address Detail">
+                <detail-view [id]="'Detail'">
+                  <input-column>
+                    <address-input-set [address]="primaryAddress"
+                                       [contact]="contact"
+                                       [editable]="editable">
+                    </address-input-set>
+                  </input-column>
+                </detail-view>
+              </card>
+            </ng-template>
+          </card-panel>
+        </list-detail-panel>
+      </card>
+      <card label="Documents">
+        <detail-view [id]="'Documents'">
+          <toolbar>
+            <toolbar-filter [name]="'filter'"
+                            [iterator]="'DocumentLV'"
+                            [editable]="editable"
+                            [filterOptions]="documentFilterOptions">
+            </toolbar-filter>
+            <toolbar-divider></toolbar-divider>
+            <toolbar-button [id]="'New'"
+                            [label]="'New Document'"
+                            [editable]="editable">
+            </toolbar-button>
+            <toolbar-button [id]="'Remove'"
+                            [label]="'Remove Selected'"
+                            [editable]="editable"
+                            [available]="false">
+            </toolbar-button>
+            <toolbar-divider></toolbar-divider>
+          </toolbar>
+          <list-view>
+            <row-iterator [id]="'DocumentLV'"
+                          [listData]="documents"
+                          [names]="['', 'Name', 'Action', 'Document Type', 'Status', 'Author', 'Uploaded']"
+                          [toAdd]="{callback: toAddAddress, initParams: [addresses]}"
+                          [toRemove]="{callback: toRemoveAddress, initParams: [addresses]}"
+                          [editable]="editable">
+              <row *ngFor="let document of documents; index as i"
+                   [iterator]="'DocumentLV'"
+                   [rowNumber]="i"
+                   [editable]="editable">
+                <radio-button-cell [id]="'nodocument'"
+                                   [data]="true"
+                                   [value]="''"
+                                   [icon]="'nodocument'">
+                </radio-button-cell>
+                <text-cell [id]="'nodocument'"
+                           [data]="document"
+                           [value]="'name'">
+                </text-cell>
+                <link-cell>
+                  <link-tb [icon]="'info_16'">
+                  </link-tb>
+                  <link-tb [icon]="'remove_document_16'">
+                  </link-tb>
+                </link-cell>
+                <range-cell [id]="'Type'"
+                            [data]="document"
+                            [value]="'type'"
+                            [options]="documentTypeOptions">
+                </range-cell>
+                <range-cell [id]="'Status'"
+                            [data]="document"
+                            [value]="'status'"
+                            [options]="documentStatusOptions">
+                </range-cell>
+                <text-cell [id]="'Author'"
+                           [data]="document"
+                           [value]="'author'">
+                </text-cell>
+                <text-cell [id]="'Uploaded'"
+                           [data]="document"
+                           [value]="'uploaded'">
+                </text-cell>
+              </row>
+            </row-iterator>
+          </list-view>
+        </detail-view>
+      </card>
+      <card label="Services">
+        <detail-view [id]="'Services'">
+          <toolbar>
+            <edit-buttons></edit-buttons>
+          </toolbar>
+          <list-view>
+            <row-iterator [id]="'ServicesLV'"
+                          [listData]="services"
+                          [names]="['Category', 'Sub Category', 'Service Type']">
+              <row *ngFor="let service of services; index as i"
+                   [iterator]="'ServicesLV'"
+                   [rowNumber]="i">
+                <text-cell [id]="'Category'"
+                           [data]="service"
+                           [value]="'category'">
+                </text-cell>
+                <text-cell [id]="'SubCategory'"
+                           [data]="service"
+                           [value]="'subCategory'">
+                </text-cell>
+                <text-cell [id]="'ServiceType'"
+                           [data]="service"
+                           [value]="'serviceType'">
+                </text-cell>
+              </row>
+            </row-iterator>
+          </list-view>
+        </detail-view>
+      </card>
+      <card label="RelatedContacts">
+        <detail-view [id]="'RelatedContacts'">
+          <toolbar>
+            <edit-buttons></edit-buttons>
+            <toolbar-divider></toolbar-divider>
+          </toolbar>
+          <list-view>
+            <row-iterator [id]="'RelatedContactsLV'"
+                          [listData]="[]"
+                          [names]="['Name', 'Relationship']">
+              <row *ngFor="let related of []; index as i"
+                   [iterator]="'RelatedContactsLV'"
+                   [rowNumber]="i">
+                <text-cell [id]="'Name'"
+                           [data]="related"
+                           [value]="''">
+                </text-cell>
+                <text-cell [id]="'Relationship'"
+                           [data]="related"
+                           [value]="''">
+                </text-cell>
+              </row>
+            </row-iterator>
+          </list-view>
+        </detail-view>
+      </card>
+      <card label="History">
+        <detail-view [id]="'History'">
+          <toolbar>
+            <toolbar-filter [name]="'filter'"
+                            [iterator]="'HistoryLV'"
+                            [label]="'Filter by Date'"
+                            [filterOptions]="historyFilterByDateOptions">
+            </toolbar-filter>
+            <toolbar-filter [name]="'filter'"
+                            [iterator]="'HistoryLV'"
+                            [label]="'Filter by Type'"
+                            [filterOptions]="historyFilterByTypeOptions">
+            </toolbar-filter>
+            <toolbar-divider></toolbar-divider>
+          </toolbar>
+          <list-view>
+            <row-iterator [id]="'HistoryLV'"
+                          [listData]="histories"
+                          [names]="['Type', 'User', 'Review By', 'Date', 'Description', 'Change Details']">
+              <row *ngFor="let history of histories; index as i"
+                   [iterator]="'HistoryLV'"
+                   [rowNumber]="i">
+                <text-cell [id]="'Type'"
+                           [data]="history"
+                           [value]="'type'">
+                </text-cell>
+                <text-cell [id]="'User'"
+                           [data]="history"
+                           [value]="'user'">
+                </text-cell>
+                <text-cell [id]="'ReviewedBy'"
+                           [data]="history"
+                           [value]="'reviewedBy'">
+                </text-cell>
+                <text-cell [id]="'Date'"
+                           [data]="history"
+                           [value]="'date'">
+                </text-cell>
+                <text-cell [id]="'Description'"
+                           [data]="history"
+                           [value]="'description'">
+                </text-cell>
+                <text-cell [id]="'ChangeDetails'"
+                           [data]="history"
+                           [value]="'changeDetails'">
+                </text-cell>
+              </row>
+            </row-iterator>
+          </list-view>
+        </detail-view>
+      </card>
+    </ng-template>
+  </card-panel>
+</screen>

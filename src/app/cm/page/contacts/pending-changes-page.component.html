@@ -1,0 +1,13 @@
+<page [id]="id"
+      [title]="title"
+      [location]="location"
+      [screenRef]="screen">
+</page>
+
+<ng-template #screen>
+  <pending-changes-screen [createContacts]="createContacts"
+                          [updateContacts]="updateContacts">
+  </pending-changes-screen>
+</ng-template>
+
+

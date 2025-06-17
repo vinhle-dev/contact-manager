@@ -1,0 +1,99 @@
+<screen>
+  <search-panel [searchCriteria]="userCriteria"
+                [searchResults]="users"
+                [search]="[{callback: search, initParams: [userService, users]}]">
+    <panel-ref>
+      <detail-view [id]="'UserCriteriaDV'">
+        <input-column>
+          <text-input [id]="'UserName'"
+                      [label]="'User Name'"
+                      [value]="'userName'"
+                      [data]="userCriteria"
+                      [editable]="editable">
+          </text-input>
+          <text-input [id]="'FirstName'"
+                      [label]="'First Name'"
+                      [value]="'firstName'"
+                      [data]="userCriteria"
+                      [editable]="editable">
+          </text-input>
+          <text-input [id]="'LastName'"
+                      [label]="'Last Name'"
+                      [value]="'lastName'"
+                      [data]="userCriteria"
+                      [editable]="editable">
+          </text-input>
+          <label-tb [label]="'Additional Restrictions'"></label-tb>
+          <input-divider></input-divider>
+          <typekey-input [id]="'Role'"
+                         [label]="'Role'"
+                         [value]="'roleId'"
+                         [data]="userCriteria"
+                         [options]="roleOptions"
+                         [editable]="editable">
+          </typekey-input>
+        </input-column>
+        <input-column>
+          <label-tb [label]="'Location'"></label-tb>
+          <typekey-input [id]="'Country'"
+                         [label]="'Country'"
+                         [value]="'country'"
+                         [data]="userCriteria"
+                         [options]="countryOptions"
+                         [editable]="editable">
+          </typekey-input>
+          <text-input [id]="'City'"
+                      [label]="'City'"
+                      [data]="userCriteria"
+                      [value]="'city'"
+                      [editable]="editable">
+          </text-input>
+          <typekey-input [id]="'State'"
+                         [label]="'State'"
+                         [value]="'state'"
+                         [data]="userCriteria"
+                         [options]="stateOptions"
+                         [editable]="editable">
+          </typekey-input>
+          <text-input [id]="'ZIPCode'"
+                      [label]="'ZIP Code'"
+                      [data]="userCriteria"
+                      [value]="'zipCode'"
+                      [editable]="editable">
+          </text-input>
+        </input-column>
+        <input-footer>
+          <search-and-reset-input-set></search-and-reset-input-set>
+        </input-footer>
+      </detail-view>
+    </panel-ref>
+    <panel-ref>
+      <title-bar [title]="'Search Results'"></title-bar>
+      <toolbar></toolbar>
+      <list-view-input>
+        <list-view>
+          <row-iterator [id]="'UserSearchResultsLV'"
+                        [listData]="users"
+                        [names]="['Name', 'User Name', 'Group Name']">
+            <row *ngFor="let user of users; index as i"
+                 [iterator]="'UserSearchResultsLV'"
+                 [rowNumber]="i">
+              <text-cell [id]="'Name'"
+                         [data]="user"
+                         [value]="'name'">
+              </text-cell>
+              <text-cell [id]="'UserName'"
+                         [data]="user"
+                         [value]="'userName'">
+              </text-cell>
+              <text-cell [id]="'Status'"
+                         [data]="userService.getGroupName(user.id)"
+                         [value]="'status'">
+              </text-cell>
+            </row>
+          </row-iterator>
+        </list-view>
+      </list-view-input>
+    </panel-ref>
+  </search-panel>
+</screen>

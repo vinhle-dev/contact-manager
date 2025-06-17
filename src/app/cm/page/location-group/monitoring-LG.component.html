@@ -1,0 +1,9 @@
+<location-group [id]="id"
+                [title]="title"
+                [locationRef]="locationRef">
+</location-group>
+
+<ng-template #locationRef>
+  <location-ref [location]="getLocation(MessageQueuesPageComponent, 'ab/admin/messaging')">
+  </location-ref>
+</ng-template>

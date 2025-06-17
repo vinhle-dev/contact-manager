@@ -1,0 +1,14 @@
+<div class="setting-divide"></div>
+<div class="dropdown">
+  <div class="setting-icon dropdown-trigger"
+       (click)="dropdown.classList.toggle('dropdown-container__show')">
+  </div>
+  <div #dropdown class="dropdown-container">
+    <a #item
+       *ngFor="let option of options"
+       class="dropdown-item"
+       (click)="onClickLink('')">
+      {{ option }}
+    </a>
+  </div>
+</div>

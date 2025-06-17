@@ -1,0 +1,18 @@
+.nav-menu-icon {
+  &::after {
+    content: "";
+    @include backgroundDefault($assets-path + "/img/small-arrow-b.png");
+    border-left: 1px solid $color-grey-light-3;
+    margin-left: 0.7rem;
+  }
+
+  &:hover::after {
+    background-image: url($assets-path + "/img/small-arrow-w.png");
+  }
+}
+
+.input-menu-icon {
+  @include backgroundDefault($assets-path + "/img/drop_button.png");
+  cursor: pointer;
+  margin-left: 0.5rem;
+}

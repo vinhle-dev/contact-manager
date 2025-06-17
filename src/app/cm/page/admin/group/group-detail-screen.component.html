@@ -1,0 +1,124 @@
+<screen>
+  <toolbar>
+    <edit-buttons></edit-buttons>
+  </toolbar>
+
+  <card-panel [cardTemplateRef]="card">
+    <ng-template #card>
+      <card label="Profile">
+        <detail-view [id]="'Profile'">
+          <input-column>
+            <text-input [id]="'Name'"
+                        [label]="'Name'"
+                        [value]="'name'"
+                        [data]="group"
+                        [editable]="editable"
+                        [required]="true">
+            </text-input>
+            <typekey-input [id]="'Type'"
+                           [label]="'Type'"
+                           [options]="typeOptions"
+                           [value]="'type'"
+                           [data]="group"
+                           [editable]="editable"
+                           [required]="true">
+            </typekey-input>
+            <typekey-input [id]="'Parent'"
+                           [label]="'Parent'"
+                           [options]="parentOptions"
+                           [value]="'parent'"
+                           [data]="group"
+                           [referenceData]="{data:this.groupService.getRootGroup(), displayValue:'name', updateValue:'id'}"
+                           [editable]="editable"
+                           [required]="true"
+                           [visible]="group.parent != null">
+            </typekey-input>
+            <typekey-input [id]="'Supervisor'"
+                           [label]="'Supervisor'"
+                           [options]="supervisorOptions"
+                           [value]="'supervisor'"
+                           [data]="group"
+                           [editable]="editable"
+                           [required]="true">
+            </typekey-input>
+
+            <list-view-input [label]="'Users'">
+              <toolbar>
+                <iterator-buttons [iterator]="'UserLV'"
+                                  [editable]="editable"></iterator-buttons>
+              </toolbar>
+              <list-view>
+                <row-iterator [id]="'UserLV'"
+                              [listData]="userGroups"
+                              [names]="['User', 'Member', 'Manager', 'Proximity Search Status']"
+                              [toAdd]="{callback: toAddUser, initParams: [group.id, userGroups]}"
+                              [toRemove]="{callback: toRemoveUser, initParams: [userGroups]}"
+                              [editable]="editable">
+                  <row *ngFor="let userGroup of userGroups; index as i"
+                       [iterator]="'UserLV'"
+                       [rowNumber]="i"
+                       [editable]="editable">
+                    <range-cell [id]="'User'" [data]="userGroup"
+                                [value]="'userId'"
+                                [referenceData]="{data: userService.getById(userGroup.userId),
+                                                displayValue: 'name',
+                                                updateValue: 'id'}"
+                                [editable]="editable"
+                                [options]="userService.getAll()">
+                    </range-cell>
+                    <radio-button-cell [id]="'Member'"
+                                       [data]="userGroup"
+                                       [value]="'member'"
+                                       [editable]="editable"></radio-button-cell>
+                    <radio-button-cell [id]="'Manager'"
+                                       [data]="userGroup"
+                                       [value]="'manager'"
+                                       [editable]="editable"></radio-button-cell>
+                    <text-cell [id]="'ProximityStatus'"
+                               [data]="userGroup"
+                               [value]="'proximityStatus'">
+                    </text-cell>
+                  </row>
+                </row-iterator>
+              </list-view>
+            </list-view-input>
+          </input-column>
+        </detail-view>
+      </card>
+      <card label="Regions">
+        <detail-view [id]="'Regions'">
+          <list-view-input>
+            <toolbar>
+              <iterator-buttons [iterator]="'RegionLV'"
+                                [editable]="editable">
+              </iterator-buttons>
+            </toolbar>
+            <list-view>
+              <row-iterator [id]="'RegionLV'"
+                            [listData]="regions"
+                            [names]="['Name', 'Areas Covered']"
+                            [toAdd]="{callback: toAddRegion, initParams: [pageService, 'ab/admin/regions/regionsearch/' + group.id + '/0']}"
+                            [toRemove]="{callback: toRemoveRegion, initParams: [regions]}"
+                            [editable]="editable">
+                <row *ngFor="let region of regions; index as i"
+                     [iterator]="'RegionLV'"
+                     [rowNumber]="i"
+                     [editable]="editable">
+                  <text-cell [id]="'Name'"
+                             [data]="region"
+                             [value]="'name'"
+                             [editable]="editable">
+                  </text-cell>
+                  <text-cell [id]="'Zones'"
+                             [data]="region"
+                             [value]="'zones'">
+                  </text-cell>
+                </row>
+              </row-iterator>
+            </list-view>
+          </list-view-input>
+        </detail-view>
+      </card>
+    </ng-template>
+  </card-panel>
+</screen>

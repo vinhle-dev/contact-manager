@@ -1,0 +1,40 @@
+<screen>
+  <detail-view [id]="'RegionsDV'">
+    <list-view-input>
+      <toolbar>
+        <toolbar-button [id]="'AddButton'"
+                        [label]="'Add Region'"
+                        [action]="{callback: addRegion, initParams: [router, 'ab/admin/regions/region']}"
+                        [shortcut]="'R'">
+        </toolbar-button>
+        <checked-value-toolbar-button [id]="'DeleteButton'"
+                                      [iterator]="'RegionLV'"
+                                      [label]="'Delete'"
+                                      [action]="{callback: removeRegion, initParams:[regions]}"
+                                      [shortcut]="'l'">
+        </checked-value-toolbar-button>
+        <toolbar-divider [editable]="editable"></toolbar-divider>
+      </toolbar>
+      <list-view>
+        <row-iterator [id]="'RegionLV'"
+                      [listData]="regions"
+                      [names]="['Name', 'Areas Covered']"
+                      [editable]="regions.length > 0 ? editable : false">
+          <row *ngFor="let region of regions; index as i"
+               [iterator]="'RegionLV'"
+               [rowNumber]="i"
+               [editable]="regions.length > 0 ? editable : false">
+            <text-cell [id]="'Name'"
+                       [data]="region"
+                       [value]="'name'">
+            </text-cell>
+            <text-cell [id]="'Zones'"
+                       [data]="region"
+                       [value]="'zones'">
+            </text-cell>
+          </row>
+        </row-iterator>
+      </list-view>
+    </list-view-input>
+  </detail-view>
+</screen>

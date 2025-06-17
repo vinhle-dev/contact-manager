@@ -1,0 +1,21 @@
+<ng-template #template>
+  <div class="lv-data {{EditMode? 'lv-data__edit' :''}}" style="{{customStyle}}">
+    <ng-container *ngIf="EditMode else readMode">
+      <input
+        #textInput
+        type="text"
+        class="lv-cell-input"
+        [value]="getValue()"
+        (change)="onValueChange(textInput.value)"
+      />
+    </ng-container>
+
+    <ng-template #readMode>
+      <div class="lv-cell-text" (click)="doAction()">
+        <span class="{{isLink? 'lv-cell-text__link' : ''}}">
+          {{ getValue() }}
+        </span>
+      </div>
+    </ng-template>
+  </div>
+</ng-template>

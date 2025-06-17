@@ -1,0 +1,65 @@
+<page [id]="id"
+      [title]="title"
+      [location]="location"
+      [screenRef]="screen"
+      [startInEditMode]="true">
+</page>
+
+<ng-template #screen>
+  <screen>
+    <verbatim-text
+      [label]="'\nUse this screen to add your vendor services to your existing vendor contacts.\n Before you can use this screen, you must define a tree of vendor services in a vendorservicetree.xml file and then import the file.\n'">
+    </verbatim-text>
+    <detail-view [id]="'VendorServicesDV'">
+      <input-column>
+        <label-tb [label]="'\n'"></label-tb>
+        <label-tb [label]="'1. Export Vendors to CSV'"></label-tb>
+        <label-tb [label]="'\n'"></label-tb>
+        <button class="btn btn__primary">Export</button>
+      </input-column>
+      <input-column>
+        <label-tb [label]="'\n'"></label-tb>
+        <label-tb [label]="'2. Map Services to Vendors in CSV'"></label-tb>
+        <div>
+          <label>File/Directory to Map:</label>
+        </div>
+        <input type="text">
+        <check-box [id]="'MapSub'"
+                   [label]="'Include Subdirectories'"
+                   [value]="'mapSub'"
+                   [data]="data"
+                   [editable]="true">
+        </check-box>
+        <button class="btn btn__primary">Export</button>
+      </input-column>
+      <input-column>
+        <label-tb [label]="'\n'"></label-tb>
+        <label-tb [label]="'3. Import Vendors with Services from CSV'"></label-tb>
+        <div>
+          <label>File/Directory to Import:</label>
+        </div>
+        <input type="text">
+        <check-box [id]="'ImportSub'"
+                   [label]="'Include Subdirectories'"
+                   [value]="'importSub'"
+                   [data]="data"
+                   [editable]="true">
+        </check-box>
+        <button class="btn btn__primary">Export</button>
+      </input-column>
+    </detail-view>
+    <input-divider></input-divider>
+    <list-view>
+      <row [editable]="true">
+        <text-cell [id]="'Process'"
+                   [data]="'Process Log:'"
+                   [value]="''">
+        </text-cell>
+        <text-cell [id]="'Description'"
+                   [data]="''"
+                   [value]="''"
+                   [width]="1000"></text-cell>
+      </row>
+    </list-view>
+  </screen>
+</ng-template>

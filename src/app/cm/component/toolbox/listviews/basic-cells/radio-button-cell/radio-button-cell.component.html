@@ -1,0 +1,40 @@
+<ng-template #template>
+  <div *ngIf="icon" class="lv-cell-radio-icon">
+    <div>
+      <img ngSrc="assets/img/{{icon}}.png" height="16" width="16" alt="">
+    </div>
+  </div>
+
+  <div class="lv-data" *ngIf="!icon">
+    <div class="lv-cell-radio" *ngIf="EditMode else readMode">
+      <div>
+        <input
+          type="button"
+          class="lv-cell-radio-button {{getValue() ? 'lv-cell-radio-button__checked' : ''}}"
+          id="yes"
+          [checked]="getValue()"
+          (click)="setValue(true)"
+        />
+        <label for="yes" class="lv-cell-radio-label">Yes</label>
+      </div>
+      <div>
+        <input
+          type="button"
+          class="lv-cell-radio-button {{getValue() ? '' : 'lv-cell-radio-button__checked'}}"
+          id="no"
+          [checked]="!getValue()"
+          (click)="setValue(false)"
+        />
+        <label for="no" class="lv-cell-radio-label">No</label>
+      </div>
+    </div>
+
+    <ng-template #readMode>
+      <div class="lv-cell-text">
+      <span>
+        {{ getValue() ? "Yes" : "No" }}
+      </span>
+      </div>
+    </ng-template>
+  </div>
+</ng-template>

@@ -1,0 +1,14 @@
+<page [id]="id"
+      [title]="title"
+      [location]="location"
+      [screenRef]="screen"
+      [afterCommit]="afterCommit.bind(this)"
+      [afterCancel]="afterCancel.bind(this)">
+</page>
+
+<ng-template #screen>
+  <group-detail-screen [group]="group"
+                       [userGroups]="userGroups"
+                       [regions]="regions">
+  </group-detail-screen>
+</ng-template>

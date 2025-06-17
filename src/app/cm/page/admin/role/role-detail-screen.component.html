@@ -1,0 +1,69 @@
+<screen>
+  <toolbar>
+    <edit-buttons></edit-buttons>
+  </toolbar>
+  <card-panel [cardTemplateRef]="card">
+    <ng-template #card>
+      <card label="Basics">
+        <detail-view [id]="'Basics'">
+          <input-column>
+            <text-input [id]="'Name'"
+                        [label]="'Name'"
+                        [value]="'name'"
+                        [data]="role"
+                        [editable]="editable"
+                        [required]="true">
+            </text-input>
+            <text-input [id]="'Description'"
+                        [label]="'Description'"
+                        [value]="'description'"
+                        [data]="role"
+                        [editable]="editable"
+                        [required]="true">
+            </text-input>
+
+            <list-view-input>
+              <toolbar>
+                <iterator-buttons [iterator]="'rolePrivilegeLV'" [editable]="editable"></iterator-buttons>
+              </toolbar>
+              <list-view>
+                <row-iterator [id]="'rolePrivilegeLV'"
+                              [listData]="rolePrivileges"
+                              [names]="['Name', 'Code', 'Description']"
+                              [toAdd]="{callback: toAdd, initParams: [rolePrivileges]}"
+                              [toRemove]="{callback: toRemove, initParams: [rolePrivileges]}"
+                              [editable]="editable">
+                  <row *ngFor="let rolePrivilege of rolePrivileges; index as i"
+                       [iterator]="'rolePrivilegeLV'"
+                       [rowNumber]="i"
+                       [editable]="editable">
+                    <range-cell [id]="'Permission'"
+                                [data]="rolePrivilege"
+                                [value]="'permissionId'"
+                                [referenceData]="{data: getPermission(rolePrivilege.permissionId), updateValue: 'id'}"
+                                [editable]="editable"
+                                [options]="options">
+                    </range-cell>
+                    <text-cell [id]="'Code'"
+                               [data]="getPermission(rolePrivilege.permissionId)"
+                               [value]="'code'">
+                    </text-cell>
+                    <text-cell [id]="'Description'"
+                               [data]="getPermission(rolePrivilege.permissionId)"
+                               [value]="'description'">
+                    </text-cell>
+                  </row>
+                </row-iterator>
+              </list-view>
+            </list-view-input>
+          </input-column>
+        </detail-view>
+      </card>
+      <card label="Users">
+        <detail-view [id]="'Users'">
+          Undev
+        </detail-view>
+      </card>
+    </ng-template>
+  </card-panel>
+</screen>
