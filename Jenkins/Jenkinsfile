@@ -38,14 +38,17 @@ pipeline {
       //     bat "sonar-scanner -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_LOGIN} ${SCANNER_OPTS}"
       //   }
       // }
-
-      bat '''
-      npm install -g @sonar/scan
-      sonar \
-        -Dsonar.host.url=http://localhost:9000 \
-        -Dsonar.token=sqp_c85282d60c9157665b3156087009ba64536e48db \
-        -Dsonar.projectKey=Contact-Manager
-      '''
+      steps {
+        script {
+          bat '''
+            npm install -g @sonar/scan
+            sonar \
+              -Dsonar.host.url=http://localhost:9000 \
+              -Dsonar.token=sqp_c85282d60c9157665b3156087009ba64536e48db \
+              -Dsonar.projectKey=Contact-Manager
+          '''
+        }
+      }
     }
 
     stage('Quality Gate') {
