@@ -30,23 +30,12 @@ pipeline {
     } */
 
     stage('SonarQube analysis') {
-      // environment {
-      //   SCANNER_OPTS = '-Dsonar.sources=src -Dsonar.tests=src -Dsonar.sources.inclusions=**/*.ts -Dsonar.sources.exclusions=**/*.spec.ts -Dsonar.test.inclusions=**/*.spec.ts -Dsonar.projectKey=contact-manager -Dsonar.projectName=contact-manager'
-      // }
-      // steps {
-      //   withSonarQubeEnv('MySonarQubeServer') {
-      //     bat "sonar-scanner -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_LOGIN} ${SCANNER_OPTS}"
-      //   }
-      // }
+      environment {
+        SCANNER_OPTS = '-Dsonar.sources=src -Dsonar.tests=src -Dsonar.sources.inclusions=**/*.ts -Dsonar.sources.exclusions=**/*.spec.ts -Dsonar.test.inclusions=**/*.spec.ts -Dsonar.projectKey=contact-manager -Dsonar.projectName=contact-manager'
+      }
       steps {
-        script {
-          bat '''
-            npm install -g @sonar/scan
-            sonar \
-              -Dsonar.host.url=http://localhost:9000 \
-              -Dsonar.token=sqp_c85282d60c9157665b3156087009ba64536e48db \
-              -Dsonar.projectKey=Contact-Manager
-          '''
+        withSonarQubeEnv('MySonarQubeServer') {
+          bat "sonar-scanner -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_LOGIN} ${SCANNER_OPTS}"
         }
       }
     }
