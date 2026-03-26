@@ -1,6 +1,5 @@
 import {inject, NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {TestComponent} from "./test/test.component";
 import {LoginPageComponent} from "./cm/page/login/login-page.component";
 import {AdminPageComponent} from "./cm/page/admin/admin-page.component";
 import {RolesPageComponent} from "./cm/page/admin/role/roles-page.component";
@@ -27,8 +26,6 @@ import {RegionSearchPageComponent} from "./cm/page/admin/regions/region-search-p
 import {AuthGuardService} from "./core/service/auth-guard.service";
 
 const routes: Routes = [
-  // This path is for testing purposes only
-  {path: "test", component: TestComponent},
 
   // CM path
   {path: "", redirectTo: "ContactManager", pathMatch: "full"},
