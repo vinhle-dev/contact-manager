@@ -24,8 +24,8 @@ pipeline {
       steps {
         script {
           // Angular example
-          sh 'npm install'
-          sh 'npm run build -- --prod'
+          bat 'npm install'
+          bat 'npm run build -- --prod'
           // Change to your actual command if .NET, Java, etc.
         }
       }
@@ -37,7 +37,7 @@ pipeline {
       }
       steps {
         withSonarQubeEnv('MySonarQubeServer') {
-          sh "sonar-scanner -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_LOGIN} ${SCANNER_OPTS}"
+          bat "sonar-scanner -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_LOGIN} ${SCANNER_OPTS}"
         }
       }
     }
