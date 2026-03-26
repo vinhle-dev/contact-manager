@@ -30,14 +30,14 @@ pipeline {
     } */
 
     stage('SonarQube analysis') {
-      /* environment {
-        SCANNER_OPTS = '-Dsonar.sources=src -Dsonar.tests=src -Dsonar.sources.inclusions=**/*.ts -Dsonar.sources.exclusions=**/*.spec.ts -Dsonar.test.inclusions=**/*.spec.ts -Dsonar.projectKey=contact-manager -Dsonar.projectName=contact-manager'
-      }
-      steps {
-        withSonarQubeEnv('MySonarQubeServer') {
-          bat "sonar-scanner -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_LOGIN} ${SCANNER_OPTS}"
-        }
-      } */
+      // environment {
+      //   SCANNER_OPTS = '-Dsonar.sources=src -Dsonar.tests=src -Dsonar.sources.inclusions=**/*.ts -Dsonar.sources.exclusions=**/*.spec.ts -Dsonar.test.inclusions=**/*.spec.ts -Dsonar.projectKey=contact-manager -Dsonar.projectName=contact-manager'
+      // }
+      // steps {
+      //   withSonarQubeEnv('MySonarQubeServer') {
+      //     bat "sonar-scanner -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_LOGIN} ${SCANNER_OPTS}"
+      //   }
+      // }
 
       bat '''
       npm install -g @sonar/scan
