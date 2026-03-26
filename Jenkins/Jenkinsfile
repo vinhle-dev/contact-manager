@@ -20,16 +20,14 @@ pipeline {
       }
     }
 
-    stage('Build') {
+    /* stage('Build') {
       steps {
         script {
-          // Angular example
           bat 'npm install'
-          bat 'npm run build -- --prod'
-          // Change to your actual command if .NET, Java, etc.
+          bat 'npm run build'
         }
       }
-    }
+    } */
 
     stage('SonarQube analysis') {
       environment {
