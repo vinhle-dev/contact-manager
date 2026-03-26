@@ -15,7 +15,6 @@ pipeline {
           branches: [[name: '*/main']],
           userRemoteConfigs: [[
             url: 'https://github.com/your-org/contact-manager.git',
-            credentialsId: 'git-credentials-id' // optional if public
           ]]
         ])
       }
