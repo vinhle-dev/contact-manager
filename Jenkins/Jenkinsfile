@@ -1,29 +1,19 @@
 pipeline {
   agent any
 
-  /* environment {
-    // SonarQube server configured in Jenkins (Manage Jenkins > Configure System > SonarQube servers)
-    SONAR_HOST_URL = "${SONAR_HOST_URL ?: 'http://sonarqube.local:9000'}"
-    SONAR_LOGIN    = credentials('sonarqube-token') // credentials ID
-  } */
-
   stages {
     stage('SonarQube analysis') {
-      /* environment {
-        SCANNER_OPTS = '-Dsonar.sources=src -Dsonar.tests=src -Dsonar.sources.inclusions=**/*.ts -Dsonar.sources.exclusions=**/*.spec.ts -Dsonar.test.inclusions=**/*.spec.ts -Dsonar.projectKey=Contact-Manager -Dsonar.projectName=contact-manager'
+      environment {
+        SONAR_PROJECT_KEY = 'Contact-Manager'
+        SONAR_PROJECT_NAME = 'Contact Manager'
+        SONAR_SCANNER_OPTS = '-Dsonar.sources=src -Dsonar.tests=src -Dsonar.sources.exclusions=**/*.spec.ts -Dsonar.projectKey=${SONAR_PROJECT_KEY} -Dsonar.projectName="${SONAR_PROJECT_NAME}"'
       }
-      steps {
-        withSonarQubeEnv('MySonarQubeServer') {
-          bat "sonar-scanner -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_LOGIN} ${SCANNER_OPTS}"
-        }
-      } */
       steps {
         script {
           scannerHome = tool 'SonarQubeServer'
         }
         withSonarQubeEnv('scannerHome') {
-          def SCANNER_OPTS = '-Dsonar.sources=src -Dsonar.tests=src -Dsonar.sources.exclusions=**/*.spec.ts -Dsonar.test.inclusions=**/*.spec.ts -Dsonar.projectKey=Contact-Manager -Dsonar.projectName="Contact Manager"'
-          sh "${scannerHome}/bin/sonar-scanner ${SCANNER_OPTS}"
+          sh "${scannerHome}/bin/sonar-scanner ${SONAR_SCANNER_OPTS}"
         }
       }
     }
