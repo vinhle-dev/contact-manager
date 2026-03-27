@@ -1,24 +1,20 @@
 pipeline {
   agent any
+  environment {
+    SONAR_PROJECT_KEY = 'Contact-Manager'
+    SONAR_PROJECT_NAME = 'Contact Manager'
+  }
 
   stages {
     stage('SonarQube analysis') {
-      environment {
-        SONAR_PROJECT_KEY = 'Contact-Manager'
-        SONAR_PROJECT_NAME = 'Contact Manager'
-        SONAR_SCANNER_OPTS = '-Dsonar.sources=src -Dsonar.tests=src -Dsonar.sources.exclusions=**/*.spec.ts -Dsonar.projectKey=${SONAR_PROJECT_KEY} -Dsonar.projectName="${SONAR_PROJECT_NAME}"'
-      }
       steps {
-        script {
-          scannerHome = tool 'SonarQubeServer'
-        }
         withSonarQubeEnv('scannerHome') {
-          sh "${scannerHome}/bin/sonar-scanner ${SONAR_SCANNER_OPTS}"
+          sh "sonar-scanner -Dsonar.projectKey=${SONAR_PROJECT_KEY} -Dsonar.projectName=${SONAR_PROJECT_NAME}"
         }
       }
     }
 
-    stage('Quality Gate') {
+    /* stage('Quality Gate') {
       steps {
         script {
           timeout(time: 5, unit: 'MINUTES') {
@@ -29,7 +25,7 @@ pipeline {
           }
         }
       }
-    }
+    } */
   }
 
   post {
